@@ -215,7 +215,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
             sendQuickReply(sender, responseText, replies);
             break;
         case "job-enquiry":
-            let replies =  [
+            let reply =  [
                 {
                     "content_type":"text",
                     "title":"Accountant",
@@ -232,7 +232,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     "payload":"Book Keeper"
                 }
             ];
-            sendQuickReply(sender, responseText, replies);
+            sendQuickReply(sender, responseText, reply);
             break;
         default:
             //unhandled action, just send back the text
