@@ -740,8 +740,27 @@ function greetUserText(userId) {
             if (user.first_name) {
                 console.log("FB user: %s %s, %s",
                     user.first_name, user.last_name, user.gender);
-
-                sendTextMessage(userId, "Welcome " + user.first_name + '!');
+                let message="Welcome to Yamaha India"+user.first_name+"I am your Bot your Bot How may I assist you Please Choose One of the following options";
+                let reply =  [
+                    {
+                        "content_type":"text",
+                        "title":"Product Enquiry",
+                        "payload":"Product Enquiry"
+                    },
+                    {
+                        "content_type":"text",
+                        "title":"Test Drive",
+                        "payload":"Test Drive"
+                    },
+                    {
+                        "content_type":"text",
+                        "title":"Complaint",
+                        "payload":"Complaint"
+                    }
+                ];
+                sendQuickReply(userId,message,reply);
+                //sendTextMessage(userId, "Welcome " + user.first_name + '!');
+                sendQuickReply()
             } else {
                 console.log("Cannot get data for fb user with id",
                     userId);
