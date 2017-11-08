@@ -235,31 +235,24 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
             sendQuickReply(sender, responseText, reply);
             break;
         case "user-data":
-            request({
-                uri: 'https://graph.facebook.com/v2.7/' + sender.id,
-                qs: {
-                    access_token: config.FB_PAGE_TOKEN
+            if(isDefined(contexts[0]) && contexts[0].name=='welcomeyamaha' && contexts[0].parameters) {
+                let phone_number = (isDefined(contexts[0].parameters['ProductPhoneNumber']) &&
+                    contexts[0].parameters['ProductPhoneNumber'] != '') ? contexts[0].parameters['ProductPhoneNumber'] : '';
+                let email = (isDefined(contexts[0].parameters['ProductEmail']) &&
+                    contexts[0].parameters['ProductEmail'] != '') ? contexts[0].parameters['ProductEmail'] : '';
+                let product_customer_interest = (isDefined(contexts[0].parameters['ProductCustomerInterest']) &&
+                    contexts[0].parameters['ProductCustomerInterest'] != '') ? contexts[0].parameters['ProductCustomerInterest'] : '';
+                let Product_Enquiry_Feedback = (isDefined(contexts[0].parameters['ProductEnquiryFeedback']) &&
+                    contexts[0].parameters['ProductEnquiryFeedback'] != '') ? contexts[0].parameters['ProductEnquiryFeedback'] : '';
+
+                if (phone_number != '' && email != '') {
+                    let emailContent =  'Phone Number:=' + phone_number + 'email:=' + email + 'customer' +
+                        'Customer Interest' + product_customer_interest + 'Product_Feedback '+ Product_Enquiry_Feedback +'.';
+                    sendTextMessage(sender, emailContent);
+                    //responseText=emailContent;
                 }
-
-            }, function (error, response, body) {
-                if (!error && response.statusCode == 200) {
-
-                    var user = JSON.parse(body);
-
-                    if (user.first_name) {
-                        console.log("FB user: %s %s, %s",
-                            user.first_name, user.last_name, user.gender);
-
-                        sendTextMessage(userId, "Welcome to yamaha India" + user.first_name + 'how may i assist you!');
-                    } else {
-                        console.log("Cannot get data for fb user with id",
-                            userId);
-                    }
-                } else {
-                    console.error(response.error);
-                }
-
-            });
+                sendTextMessage(sender, uname);
+            }
                 break;
         case "user-id":
             sendTextMessage(sender,"Your Id"+sender+"");
