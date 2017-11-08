@@ -174,14 +174,14 @@ function handleMessageAttachments(messageAttachments, senderID){
             +messageAttachments[0].payload.coordinates.lat
             +",longitude:"
             +messageAttachments[0].payload.coordinates.long;
-            contexts[0].parameters['lattitude'] =messageAttachments[0].payload.coordinates.lat;
-            contexts[0].parameters['longitude'] =messageAttachments[0].payload.coordinates.long;
                 let replies =  [
             {
                 "content_type":"GetPrice",
                 "title":"GetPrice",
                 "payload":text1
             }];
+        contexts[0].parameters['lattitude'] =messageAttachments[0].payload.coordinates.lat;
+        contexts[0].parameters['longitude'] =messageAttachments[0].payload.coordinates.long;    
         sendQuickReply(senderID,text1,replies);
         //sendTextMessage(senderID, "Attachment received. Thank you."+text+"fsdf");
     }
