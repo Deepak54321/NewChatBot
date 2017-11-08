@@ -251,7 +251,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     sendTextMessage(sender, emailContent);
                     //responseText=emailContent;
                 }
-                sendTextMessage(sender, uname);
+                sendTextMessage(sender, responseText);
             }
                 break;
         case "user-id":
