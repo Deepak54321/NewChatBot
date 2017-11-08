@@ -235,8 +235,38 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
             sendQuickReply(sender, responseText, reply);
             break;
         case "user-data":
-                greetUserText(sender);
+            request({
+                uri: 'https://graph.facebook.com/v2.7/' + sender.id,
+                qs: {
+                    access_token: config.FB_PAGE_TOKEN
+                }
+
+            }, function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+
+                    var user = JSON.parse(body);
+
+                    if (user.first_name) {
+                        console.log("FB user: %s %s, %s",
+                            user.first_name, user.last_name, user.gender);
+
+                        sendTextMessage(userId, "Welcome to yamaha India" + user.first_name + 'how may i assist you!');
+                    } else {
+                        console.log("Cannot get data for fb user with id",
+                            userId);
+                    }
+                } else {
+                    console.error(response.error);
+                }
+
+            });
                 break;
+        case "user-id":
+            sendTextMessage(sender,"Your Id"+sender+"");
+            break;
+        case "user":
+            sendTextMessage(sender,"Your Id"+sender.id+"");
+            break;
         default:
             //unhandled action, just send back the text
             sendTextMessage(sender, responseText);
