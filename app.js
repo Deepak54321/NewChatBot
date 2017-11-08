@@ -740,7 +740,7 @@ function greetUserText(userId) {
             if (user.first_name) {
                 console.log("FB user: %s %s, %s",
                     user.first_name, user.last_name, user.gender);
-                let message=user.first_name+"I am your Bot  Please Choose One of the following options";
+                let message=user.first_name+"I am your Bot your Bot How may I assist you Please Choose One of the following options";
                 let reply =  [
                     {
                         "content_type":"text",
