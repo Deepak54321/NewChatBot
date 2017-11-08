@@ -174,10 +174,12 @@ function handleMessageAttachments(messageAttachments, senderID){
             +messageAttachments[0].payload.coordinates.lat
             +",longitude:"
             +messageAttachments[0].payload.coordinates.long;
-        let replies =  [
+            contexts[0].parameters['lattitude'] =messageAttachments[0].payload.coordinates.lat;
+            contexts[0].parameters['longitude'] =messageAttachments[0].payload.coordinates.long;
+                let replies =  [
             {
-                "content_type":"text",
-                "title":"Next",
+                "content_type":"GetPrice",
+                "title":"GetPrice",
                 "payload":text1
             }];
         sendQuickReply(senderID,text1,replies);
@@ -260,10 +262,13 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     contexts[0].parameters['ProductCustomerInterest'] != '') ? contexts[0].parameters['ProductCustomerInterest'] : '';
                 let Product_Enquiry_Feedback = (isDefined(contexts[0].parameters['ProductEnquiryFeedback']) &&
                     contexts[0].parameters['ProductEnquiryFeedback'] != '') ? contexts[0].parameters['ProductEnquiryFeedback'] : '';
-
+                let lattitude=(isDefined(contexts[0].parameters['lattitude']) &&
+                    contexts[0].parameters['longitude'] != '') ? contexts[0].parameters['longitude'] : '';
+                let longitude=(isDefined(contexts[0].parameters['longitude']) &&
+                        contexts[0].parameters['longitude'] != '') ? contexts[0].parameters['longitude'] : '';
                 if (phone_number != '' && email != '') {
                     let emailContent =  'Phone Number:=' + phone_number + 'email:=' + email + 'customer' +
-                        'Customer Interest' + product_customer_interest + 'Product_Feedback '+ Product_Enquiry_Feedback +'.';
+                        'Customer Interest' + product_customer_interest + 'Product_Feedback '+ Product_Enquiry_Feedback +'lattitude'+lattitude+'';
                     sendTextMessage(sender, emailContent);
                     //responseText=emailContent;
                 }
