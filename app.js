@@ -166,7 +166,23 @@ function receivedMessage(event) {
 
 function handleMessageAttachments(messageAttachments, senderID){
     //for now just reply
-    sendTextMessage(senderID, "Attachment received. Thank you.");
+    var text1=messageAttachments[0].payload.url;
+    //If no URL, then it is a location
+    if(text1 == undefined || text1 == "")
+    {
+        text1 =  "latitude:"
+            +messageAttachments[0].payload.coordinates.lat
+            +",longitude:"
+            +messageAttachments[0].payload.coordinates.long;
+        let replies =  [
+            {
+                "content_type":"text",
+                "title":"Next",
+                "payload":text1
+            }];
+        sendQuickReply(senderID,text1,replies);
+        //sendTextMessage(senderID, "Attachment received. Thank you."+text+"fsdf");
+    }
 }
 
 function handleQuickReply(senderID, quickReply, messageId) {
@@ -254,8 +270,25 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                 sendTextMessage(sender, responseText);
             }
                 break;
-        case "user-id":
-            sendTextMessage(sender,"Your Id"+sender+"");
+        case "dealer-price":
+            var request = require('request');
+            request({
+                url:'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/statewiseprice/getprice?product_profile_id=salutorxspcol&state_id=240'
+            },function (error,response,body) {
+                if (!error && response.statusCode == 200) {
+                    let result = JSON.parse(body);
+                    let responseCode=result.responseData;
+                    let productPrice=responseCode.product_price;
+                    let price=productPrice[0].price;
+                    {
+                        sendTextMessage(sender, price);
+                        //greetUserText(sender.id);
+                    }
+                }
+                else {
+                    console(log.error());
+                }
+            });
             break;
         case "user":
             sendTextMessage(sender,"Your Id"+sender.id+"");
