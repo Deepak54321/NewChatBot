@@ -234,6 +234,9 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
             ];
             sendQuickReply(sender, responseText, reply);
             break;
+        case "user-data":
+                greetUserText(sender);
+                break;
         default:
             //unhandled action, just send back the text
             sendTextMessage(sender, responseText);
