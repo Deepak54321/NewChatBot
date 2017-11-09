@@ -170,18 +170,18 @@ function handleMessageAttachments(messageAttachments, senderID){
     //If no URL, then it is a location
     if(text1 == undefined || text1 == "")
     {
-        text1 =  "latitude:"
+        /*text1 =  "latitude:"
             +messageAttachments[0].payload.coordinates.lat
             +",longitude:"
-            +messageAttachments[0].payload.coordinates.long;
+            +messageAttachments[0].payload.coordinates.long;*/
                 let replies =  [
             {
-                "content_type":"GetPrice",
+                "content_type":"text",
                 "title":"GetPrice",
-                "payload":text1
+                "payload":"Get Price"
             }];
         contexts[0].parameters['lattitude'] =messageAttachments[0].payload.coordinates.lat;
-        contexts[0].parameters['longitude'] =messageAttachments[0].payload.coordinates.long;    
+        contexts[0].parameters['longitude'] =messageAttachments[0].payload.coordinates.long;
         sendQuickReply(senderID,text1,replies);
         //sendTextMessage(senderID, "Attachment received. Thank you."+text+"fsdf");
     }
