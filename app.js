@@ -300,6 +300,8 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
             let dealer_pin=(isDefined(contexts[0].parameters['pincode'])&&
                 contexts[0].parameters['pincode']!='')? contexts[0].parameters['pincode']:'';
             var pincode=110005;
+            var StateId='';
+            var CityId='';
 
             var request = require('request');
             request({
@@ -325,13 +327,43 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                         },function (error,response,body) {
                             if (!error && response.statusCode == 200) {
                                 let result = JSON.parse(body);
-                                let responseCode=result.responseData;
-                                let productPrice=responseCode.product_price;
-                                let price=productPrice[0].price;
+                                let responseData=result.responseData;
+                                var states=responseData.states;
+                                for(var i=0; i<states.length;i++)
                                 {
-                                    sendTextMessage(sender, price);
-                                    //greetUserText(sender.id);
+                                    if(states[i].state_name.ignoreCase==state.ignoreCase)
+                                    {
+                                        StateId=states[i].profile_id;
+                                    }
+                                    else
+                                    {
+                                        sendTextMessage(sender,"No Dealers found in your region");
+                                    }
                                 }
+                                sendTextMessage(sender,StateId);
+                                request({
+                                    url:'https://maps.googleapis.com/maps/api/geocode/json?address='+pincode+'&key=AIzaSyD_YqB4d_-xKcmNP9jJCiPkJYDS8J3f6pI'
+                                },function (error,response,body)
+                                {
+                                    let result = JSON.parse(body);
+                                    let responsData=result.responseData;
+                                    var citites=responsData.cities;
+                                    for(var i=0; i<states.length;i++)
+                                    {
+                                        if(citites[i].city_name.ignoreCase==city.ignoreCase)
+                                        {
+                                            CityId=citites[i].city_profile_id;
+                                            var message =StateId+CityId;
+                                            sendTextMessage(sender,message);
+                                        }
+                                        else
+                                        {
+                                            sendTextMessage(sender,"No Dealers found in your region");
+                                        }
+                                    }
+
+                                });
+
                             }
                             else {
                                 console(log.error());
