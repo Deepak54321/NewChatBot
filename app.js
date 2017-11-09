@@ -347,14 +347,14 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 //sendTextMessage(sender,StateId);
                                 //3
 
-                                var message =State;
+                                //var message =State;
                                 //sendTextMessage(sender,view);
                             }
                             else {
                                 console(log.error());
                             }
                         });
-                       var message=StateId+CityId;
+                       var message=StateId;
                        sendTextMessage(sender,message);
                     }
                 }
