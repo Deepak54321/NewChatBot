@@ -327,9 +327,9 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                         lat=location.lat;
                         lng=location.lng;
                         //console.log(city);
-                        //let view=state+city+country+'Hi now you can get your dealers'+lat+lng;
+                        let view=State+City+Country+'Hi now you can get your dealers'+lat+lng;
                         //2
-                        request({
+                       /* request({
                             url:'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/state'
                         },function (error,response,body) {
                             if (!error && response.statusCode == 200) {
@@ -348,13 +348,13 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 //3
 
                                 var message =State;
-                                sendTextMessage(sender,message);
+                                sendTextMessage(sender,view);
                             }
                             else {
                                 console(log.error());
                             }
-                        });
-
+                        });*/
+                        sendTextMessage(sender,view);
                     }
                 }
                 else {
