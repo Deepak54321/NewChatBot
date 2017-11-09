@@ -299,10 +299,11 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
            // let dealer_pin= contexts[0].parameters['pincode'];
             let dealer_pin=(isDefined(contexts[0].parameters['pincode'])&&
                 contexts[0].parameters['pincode']!='')? contexts[0].parameters['pincode']:'';
+            var pincode=110005;
 
             var request = require('request');
             request({
-                url:'https://maps.googleapis.com/maps/api/geocode/json?address=110008&key=AIzaSyD_YqB4d_-xKcmNP9jJCiPkJYDS8J3f6pI'
+                url:'https://maps.googleapis.com/maps/api/geocode/json?address='+pincode+'&key=AIzaSyD_YqB4d_-xKcmNP9jJCiPkJYDS8J3f6pI'
             },function (error,response,body) {
                 if (!error && response.statusCode == 200) {
                     let result = JSON.parse(body);
