@@ -355,18 +355,19 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 //sendTextMessage(sender,StateId);
                                 //3
                                 request({
-                                    url:'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/city?profile_id='+StateId+''
+                                    url:'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/city?profile_id=delhi'
                                 },function (error,response,body)
                                 {
                                     if (!error && response.statusCode == 200) {
                                         var result = JSON.parse(body);
                                         var responsData = result.responseData;
                                         var citites = responsData.cities;
-                                        for (var i = 0; i < citites.length; i++) {
+                                       /* for (var i = 0; i < citites.length; i++) {
                                             if (citites[i].city_name == city) {
                                                 CityId = citites[i].city_profile_id;
                                             }
-                                        }
+                                        }*/
+                                       CityId=citites[0].city_profile_id;
                                         var message=StateId+CityId;
                                        sendTextMessage(sender,message);
                                     }
