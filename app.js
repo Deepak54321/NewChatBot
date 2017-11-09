@@ -328,8 +328,8 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                             url:'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/statewiseprice/getprice?product_profile_id=salutorxspcol&state_id=240'
                         },function (error,response,body) {
                             if (!error && response.statusCode == 200) {
-                                let result = JSON.parse(body);
-                                let responseData=result.responseData;
+                                var res = JSON.parse(body);
+                                var responseData=res.responseData;
                                 var states=responseData.states;
                                 for(var i=0; i<states.length;i++)
                                 {
@@ -337,10 +337,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                     {
                                         StateId=states[i].profile_id;
                                     }
-                                    else
-                                    {
-                                        sendTextMessage(sender,"No Dealers found in your region");
-                                    }
+
                                 }
                                 //sendTextMessage(sender,StateId);
                                 //3
@@ -348,25 +345,21 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                     url:'https://maps.googleapis.com/maps/api/geocode/json?address='+pincode+'&key=AIzaSyD_YqB4d_-xKcmNP9jJCiPkJYDS8J3f6pI'
                                 },function (error,response,body)
                                 {
-                                    let result = JSON.parse(body);
-                                    let responsData=result.responseData;
-                                    var citites=responsData.cities;
-                                    for(var i=0; i<states.length;i++)
-                                    {
-                                        if(citites[i].city_name.ignoreCase==city.ignoreCase)
-                                        {
-                                            CityId=citites[i].city_profile_id;
-                                            var message =StateId+CityId;
-                                            sendTextMessage(sender,message);
-                                        }
-                                        else
-                                        {
-                                            sendTextMessage(sender,"No Dealers found in your region");
+                                    if (!error && response.statusCode == 200) {
+                                        var result = JSON.parse(body);
+                                        var responsData = result.responseData;
+                                        var citites = responsData.cities;
+                                        for (var i = 0; i < states.length; i++) {
+                                            if (citites[i].city_name.ignoreCase == city.ignoreCase) {
+                                                CityId = citites[i].city_profile_id;
+
+                                            }
+
                                         }
                                     }
-
                                 });
-
+                                var message =StateId+CityId;
+                                sendTextMessage(sender,message);
                             }
                             else {
                                 console(log.error());
