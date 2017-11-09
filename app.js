@@ -164,7 +164,7 @@ function receivedMessage(event) {
 }
 
 
-function handleMessageAttachments(messageAttachments, senderID){
+/*function handleMessageAttachments(messageAttachments, senderID){
     //for now just reply
     var text1=messageAttachments[0].payload.url;
     //If no URL, then it is a location
@@ -185,7 +185,7 @@ function handleMessageAttachments(messageAttachments, senderID){
         sendQuickReply(senderID,text1,replies);
         //sendTextMessage(senderID, "Attachment received. Thank you."+text+"fsdf");
     }
-}
+}*/
 
 function handleQuickReply(senderID, quickReply, messageId) {
     var quickReplyPayload = quickReply.payload;
@@ -291,6 +291,32 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     }
                 }
                 else {
+                    console(log.error());
+                }
+            });
+            break;
+        case "dealer-info":
+           // let dealer_pin= contexts[0].parameters['pincode'];
+            let dealer_pin=(isDefined(contexts[0].parameters['pincode'])&&
+                contexts[0].parameters['pincode']!='')? contexts[0].parameters['pincode']:'';
+
+            var request = require('request');
+            request({
+                url:'https://maps.googleapis.com/maps/api/geocode/json?address=" + dealer_pin + "&key=AIzaSyD_YqB4d_-xKcmNP9jJCiPkJYDS8J3f6pI'
+            },function (error,response,body) {
+                if (!error && response.statusCode == 200) {
+                    let result = JSON.parse(body);
+                    let Results=result.results;
+                    for(var i=0;i<Results.length;i++) {
+                        var address = Results[i].formatted_address;
+                        var city = address.split(',', 1)[0];
+                        console.log(city);
+                        let view=address+city+'Hi now you can get your dealers';
+                        sendTextMessage(sender,view);
+                    }
+                }
+                else {
+                    sendTextMessage(sender,"you have entered wrong pin codes");
                     console(log.error());
                 }
             });
