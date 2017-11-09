@@ -166,25 +166,7 @@ function receivedMessage(event) {
 
 function handleMessageAttachments(messageAttachments, senderID){
     //for now just reply
-    var text1=messageAttachments[0].payload.url;
-    //If no URL, then it is a location
-    if(text1 == undefined || text1 == "")
-    {
-        /*text1 =  "latitude:"
-            +messageAttachments[0].payload.coordinates.lat
-            +",longitude:"
-            +messageAttachments[0].payload.coordinates.long;*/
-                let replies =  [
-            {
-                "content_type":"text",
-                "title":"GetPrice",
-                "payload":"Get Price"
-            }];
-        contexts[0].parameters['lattitude'] =messageAttachments[0].payload.coordinates.lat;
-        contexts[0].parameters['longitude'] =messageAttachments[0].payload.coordinates.long;
-        sendQuickReply(senderID,text1,replies);
-        //sendTextMessage(senderID, "Attachment received. Thank you."+text+"fsdf");
-    }
+    sendTextMessage(senderID, "Attachment received. Thank you.");
 }
 
 function handleQuickReply(senderID, quickReply, messageId) {
@@ -207,97 +189,33 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                 {
                     "content_type":"text",
                     "title":"Excellent",
-                    "image_url":"https://ih1.redbubble.net/image.237042550.9854/sticker,375x360-bg,ffffff.u4.png",
+                    "image_url":"http://example.com/img/red.png",
                     "payload":"Excellent"
                 },
                 {
                     "content_type":"text",
                     "title":"Good",
-                    "image_url":"https://previews.123rf.com/images/fotoall/fotoall0907/fotoall090700085/5270227-Smiley-face-isolated-on-white-background-Stock-Photo-happy.jpg",
+                    "image_url":"http://example.com/img/red.png",
                     "payload":"Good"
                 },
                 {
                     "content_type":"text",
                     "title":"Average",
-                    "image_url":"https://previews.123rf.com/images/vectorshots/vectorshots1211/vectorshots121100267/16104680-Smile-Icon-Vector-Stock-Vector-smiley-face-smile.jpg",
+                    "image_url":"http://example.com/img/red.png",
                     "payload":"Average"
                 },
                 {
                     "content_type":"text",
                     "title":"Bad",
-                    "image_url":"https://st3.depositphotos.com/1954927/15979/v/1600/depositphotos_159794904-stock-illustration-smileyemoticon-yellow-face-with-emotions.jpg",
+                    "image_url":"http://example.com/img/red.png",
                     "payload":"Bad"
-
                 }
             ];
             sendQuickReply(sender, responseText, replies);
             break;
-        case "job-enquiry":
-            let reply =  [
-                {
-                    "content_type":"text",
-                    "title":"Accountant",
-                    "payload":"Accountant"
-                },
-                {
-                    "content_type":"text",
-                    "title":"Sales",
-                    "payload":"Sales"
-                },
-                {
-                    "content_type":"text",
-                    "title":"Bookkeeper",
-                    "payload":"Book Keeper"
-                }
-            ];
-            sendQuickReply(sender, responseText, reply);
-            break;
         case "user-data":
-            if(isDefined(contexts[0]) && contexts[0].name=='welcomeyamaha' && contexts[0].parameters) {
-                let phone_number = (isDefined(contexts[0].parameters['ProductPhoneNumber']) &&
-                    contexts[0].parameters['ProductPhoneNumber'] != '') ? contexts[0].parameters['ProductPhoneNumber'] : '';
-                let email = (isDefined(contexts[0].parameters['ProductEmail']) &&
-                    contexts[0].parameters['ProductEmail'] != '') ? contexts[0].parameters['ProductEmail'] : '';
-                let product_customer_interest = (isDefined(contexts[0].parameters['ProductCustomerInterest']) &&
-                    contexts[0].parameters['ProductCustomerInterest'] != '') ? contexts[0].parameters['ProductCustomerInterest'] : '';
-                let Product_Enquiry_Feedback = (isDefined(contexts[0].parameters['ProductEnquiryFeedback']) &&
-                    contexts[0].parameters['ProductEnquiryFeedback'] != '') ? contexts[0].parameters['ProductEnquiryFeedback'] : '';
-                let lattitude=(isDefined(contexts[0].parameters['lattitude']) &&
-                    contexts[0].parameters['longitude'] != '') ? contexts[0].parameters['longitude'] : '';
-                let longitude=(isDefined(contexts[0].parameters['longitude']) &&
-                        contexts[0].parameters['longitude'] != '') ? contexts[0].parameters['longitude'] : '';
-                if (phone_number != '' && email != '') {
-                    let emailContent =  'Phone Number:=' + phone_number + 'email:=' + email + 'customer' +
-                        'Customer Interest' + product_customer_interest + 'Product_Feedback '+ Product_Enquiry_Feedback +'lattitude'+lattitude+'';
-                    sendTextMessage(sender, emailContent);
-                    //responseText=emailContent;
-                }
-                sendTextMessage(sender, responseText);
-            }
-                break;
-        case "dealer-price":
-            var request = require('request');
-            request({
-                url:'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/statewiseprice/getprice?product_profile_id=salutorxspcol&state_id=240'
-            },function (error,response,body) {
-                if (!error && response.statusCode == 200) {
-                    let result = JSON.parse(body);
-                    let responseCode=result.responseData;
-                    let productPrice=responseCode.product_price;
-                    let price=productPrice[0].price;
-                    {
-                        sendTextMessage(sender, price);
-                        //greetUserText(sender.id);
-                    }
-                }
-                else {
-                    console(log.error());
-                }
-            });
-            break;
-        case "user":
-            sendTextMessage(sender,"Your Id"+sender.id+"");
-            break;
+              greetUserText(sender.id);
+              break;
         default:
             //unhandled action, just send back the text
             sendTextMessage(sender, responseText);
@@ -771,28 +689,8 @@ function greetUserText(userId) {
             if (user.first_name) {
                 console.log("FB user: %s %s, %s",
                     user.first_name, user.last_name, user.gender);
-                //contexts[0].parameters['UserName'] = user.first_name;
-                let message=user.first_name +" I am your Bot your Bot Please Choose One of the following options";
-                let reply =  [
-                    {
-                        "content_type":"text",
-                        "title":"Product Enquiry",
-                        "payload":"Product Enquiry"
-                    },
-                    {
-                        "content_type":"text",
-                        "title":"Test Drive",
-                        "payload":"Test Drive"
-                    },
-                    {
-                        "content_type":"text",
-                        "title":"Complaint",
-                        "payload":"Complaint"
-                    }
-                ];
-                sendQuickReply(userId,message,reply);
-                //sendTextMessage(userId, "Welcome " + user.first_name + '!');
-                sendQuickReply()
+
+                sendTextMessage(userId, "Welcome " + user.first_name + '!');
             } else {
                 console.log("Cannot get data for fb user with id",
                     userId);
