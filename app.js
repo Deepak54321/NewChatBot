@@ -338,7 +338,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 var res = JSON.parse(body);
                                 var responseData=res.responseData;
                                 var states=responseData.states;
-                                var message=states[0].state_name;
+                                //var message=states[0].state_name;
                                 //var states=responseData.states;
                                 //sendTextMessage(sender,message);
                                for(var i=0; i<states.length;i++)
