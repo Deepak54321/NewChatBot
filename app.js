@@ -318,9 +318,26 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                         var location=gemotry.location;
                         var lat=location.lat;
                         var lng=location.lng;
-                        console.log(city);
-                        let view=state+city+country+'Hi now you can get your dealers'+lat+lng;
-                        sendTextMessage(sender,view);
+                        //console.log(city);
+                        //let view=state+city+country+'Hi now you can get your dealers'+lat+lng;
+                        request({
+                            url:'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/statewiseprice/getprice?product_profile_id=salutorxspcol&state_id=240'
+                        },function (error,response,body) {
+                            if (!error && response.statusCode == 200) {
+                                let result = JSON.parse(body);
+                                let responseCode=result.responseData;
+                                let productPrice=responseCode.product_price;
+                                let price=productPrice[0].price;
+                                {
+                                    sendTextMessage(sender, price);
+                                    //greetUserText(sender.id);
+                                }
+                            }
+                            else {
+                                console(log.error());
+                            }
+                        });
+
                     }
                 }
                 else {
