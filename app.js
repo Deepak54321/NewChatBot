@@ -349,21 +349,38 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                         State_Name=states[i].state_name;
 
                                     }
-                                 //State_Name=State_Name+states[i].state_name;
 
                                 }
                                 sendTextMessage(sender,StateId);
                                 //3
 
-                                //var message =State;
-                                //sendTextMessage(sender,view);
+
+                                request({
+                                    url:'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/city?profile_id='+StateId
+                                },function (error,response,body)
+                                {
+                                    if (!error && response.statusCode == 200) {
+                                        var result = JSON.parse(body);
+                                        var responsData = result.responseData;
+                                        var citites = responsData.cities;
+                                        for (var i = 0; i < citites.length; i++) {
+                                            if (citites[i].city_name == city) {
+                                                CityId = citites[i].city_profile_id;
+                                            }
+
+                                        }
+                                    }
+                                    else {
+                                        console(log.error());
+                                    }
+                                });
                             }
                             else {
                                 console(log.error());
                             }
                         });
-                       //var message=State+State_Name;
-                       //sendTextMessage(sender,message);
+                       var message=StateId+CityId;
+                       sendTextMessage(sender,message);
                     }
                 }
                 else {
