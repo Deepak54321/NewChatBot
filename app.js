@@ -311,8 +311,9 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     for(var i=0;i<Results.length;i++) {
                         var address = Results[i].formatted_address;
                         var city = address.split(',', 1)[0];
+                        var state=address.split(',',1)[1];
                         console.log(city);
-                        let view=address+city+'Hi now you can get your dealers';
+                        let view=state+city+'Hi now you can get your dealers';
                         sendTextMessage(sender,view);
                     }
                 }
