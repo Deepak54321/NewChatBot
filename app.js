@@ -362,7 +362,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                         var result = JSON.parse(body);
                                         var responsData = result.responseData;
                                         var citites = responsData.cities;
-                                       /for (var i = 0; i < citites.length; i++) {
+                                       for (var i = 0; i < citites.length; i++) {
                                             if (citites[i].city_name == city) {
                                                 CityId = citites[i].city_profile_id;
                                             }
