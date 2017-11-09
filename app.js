@@ -302,7 +302,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 
             var request = require('request');
             request({
-                url:'https://maps.googleapis.com/maps/api/geocode/json?address=" + dealer_pin + "&key=AIzaSyD_YqB4d_-xKcmNP9jJCiPkJYDS8J3f6pI'
+                url:'https://maps.googleapis.com/maps/api/geocode/json?address=110008&key=AIzaSyD_YqB4d_-xKcmNP9jJCiPkJYDS8J3f6pI'
             },function (error,response,body) {
                 if (!error && response.statusCode == 200) {
                     let result = JSON.parse(body);
