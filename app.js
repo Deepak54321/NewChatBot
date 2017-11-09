@@ -302,6 +302,11 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
             var pincode=110005;
             var StateId='';
             var CityId='';
+            var City='';
+            var State='';
+            var Country='';
+            var lat='';
+            var lng='';
 
             var request = require('request');
             //1
@@ -313,14 +318,14 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     let Results=result.results;
                     for(var i=0;i<Results.length;i++) {
                         var address = Results[i].formatted_address;
-                        var country=address.split(',',3)[2];
+                        Country=address.split(',',3)[2];
                         var stateF = address.split(',',2)[1];
-                        var state=stateF.split(' ',2)[1];
-                        var city=address.split(',',1)[0];
+                        State=stateF.split(' ',2)[1];
+                        City=address.split(',',1)[0];
                         var gemotry=Results[i].geometry;
                         var location=gemotry.location;
-                        var lat=location.lat;
-                        var lng=location.lng;
+                        lat=location.lat;
+                        lng=location.lng;
                         //console.log(city);
                         //let view=state+city+country+'Hi now you can get your dealers'+lat+lng;
                         //2
@@ -341,27 +346,8 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 }
                                 //sendTextMessage(sender,StateId);
                                 //3
-                                request({
-                                    url:'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/city?profile_id='+StateId
-                                },function (error,response,body)
-                                {
-                                    if (!error && response.statusCode == 200) {
-                                        var result = JSON.parse(body);
-                                        var responsData = result.responseData;
-                                        var citites = responsData.cities;
-                                        for (var i = 0; i < states.length; i++) {
-                                            if (citites[i].city_name.ignoreCase == city.ignoreCase) {
-                                                CityId = citites[i].city_profile_id;
 
-                                            }
-
-                                        }
-                                    }
-                                    else {
-                                        console(log.error());
-                                    }
-                                });
-                                var message =StateId+CityId;
+                                var message =StateId;
                                 sendTextMessage(sender,message);
                             }
                             else {
