@@ -304,6 +304,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
             var CityId='';
 
             var request = require('request');
+            //1
             request({
                 url:'https://maps.googleapis.com/maps/api/geocode/json?address='+pincode+'&key=AIzaSyD_YqB4d_-xKcmNP9jJCiPkJYDS8J3f6pI'
             },function (error,response,body) {
@@ -322,6 +323,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                         var lng=location.lng;
                         //console.log(city);
                         //let view=state+city+country+'Hi now you can get your dealers'+lat+lng;
+                        //2
                         request({
                             url:'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/statewiseprice/getprice?product_profile_id=salutorxspcol&state_id=240'
                         },function (error,response,body) {
@@ -340,7 +342,8 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                         sendTextMessage(sender,"No Dealers found in your region");
                                     }
                                 }
-                                sendTextMessage(sender,StateId);
+                                //sendTextMessage(sender,StateId);
+                                //3
                                 request({
                                     url:'https://maps.googleapis.com/maps/api/geocode/json?address='+pincode+'&key=AIzaSyD_YqB4d_-xKcmNP9jJCiPkJYDS8J3f6pI'
                                 },function (error,response,body)
