@@ -338,7 +338,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 var states=responseData.states;
                                 for(var i=0; i<states.length;i++)
                                 {
-                                    if(states[i].state_name.ignoreCase==state.ignoreCase)
+                                    if(states[i].state_name.ignoreCase==State.ignoreCase)
                                     {
                                         StateId=states[i].profile_id;
                                     }
