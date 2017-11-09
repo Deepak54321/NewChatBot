@@ -314,7 +314,8 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                         var stateF = address.split(',',2)[1];
                         var state=stateF.split(' ',2)[1];
                         var city=address.split(',',1)[0];
-                        var location=address.geometry.location;
+                        var gemotry=Results[i].geometry;
+                        var location=gemotry.location;
                         var lat=location.lat;
                         var lng=location.lng;
                         console.log(city);
