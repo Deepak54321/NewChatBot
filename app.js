@@ -178,7 +178,7 @@ function handleMessageAttachments(messageAttachments, senderID){
             {
                 "content_type":"text",
                 "title":"GetPrice",
-                "payload":"Get Price"
+                "payload":text1
             }];
         contexts[0].parameters['lattitude'] =messageAttachments[0].payload.coordinates.lat;
         contexts[0].parameters['longitude'] =messageAttachments[0].payload.coordinates.long;
