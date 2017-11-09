@@ -308,6 +308,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
             var lat='';
             var lng='';
             var State_Name='';
+            var City_Name='';
 
             var request = require('request');
             //1
@@ -367,8 +368,9 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                             if (citites[i].city_name == city) {
                                                 CityId = citites[i].city_profile_id;
                                             }
-
                                         }
+                                        var message=StateId+CityId;
+                                        sendTextMessage(sender,message);
                                     }
                                     else {
                                         console(log.error());
@@ -379,8 +381,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 console(log.error());
                             }
                         });
-                       var message=StateId+CityId;
-                       sendTextMessage(sender,message);
+                       
                     }
                 }
                 else {
