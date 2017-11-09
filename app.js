@@ -363,14 +363,28 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                         var responsData = result.responseData;
                                         var citites = responsData.cities;
                                        for (var i = 0; i < citites.length; i++) {
-                                           
+
                                             if (citites[i].city_name == City) {
                                                 CityId = citites[i].city_profile_id;
                                             }
                                         }
-                                        //CityId=citites[0].city_profile_id;
-                                        var message=StateId+CityId;
-                                       sendTextMessage(sender,message);
+                                        //var message=StateId+CityId;
+                                       //sendTextMessage(sender,message);
+
+                                        request({
+                                            url:'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/search?type=sales&profile_id='+StateId+'&city_profile_id='+CityId
+                                        },function (error,response,body)
+                                        {
+                                            if (!error && response.statusCode == 200) {
+                                                var result = JSON.parse(body);
+                                                var responsData = result.responseCode;
+                                               sendTextMessage(sender,responsData);
+                                            }
+                                            else {
+                                                console(log.error());
+                                            }
+                                        });
+
                                     }
                                     else {
                                         console(log.error());
