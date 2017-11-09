@@ -337,8 +337,9 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                             if (!error && response.statusCode == 200) {
                                 var res = JSON.parse(body);
                                 var responseData=res.responseData;
-                                var states=responseData.states;
-                                for(var i=0; i<states.length;i++)
+                                //var states=responseData.states;
+                                sendTextMessage(sender,responseData);
+                               /* for(var i=0; i<states.length;i++)
                                 {
                                   /*  if(states[i].state_name===State)
                                     {
@@ -346,9 +347,9 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                         State_Name=states[i].state_name;
 
                                     }*/
-                                  State_Name+=states[i].state_name;
+                                 // State_Name+=states[i].state_name;
 
-                                }
+                                //}
                                 //sendTextMessage(sender,StateId);
                                 //3
 
@@ -359,8 +360,8 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 console(log.error());
                             }
                         });
-                       var message=State+State_Name;
-                       sendTextMessage(sender,message);
+                       //var message=State+State_Name;
+                       //sendTextMessage(sender,message);
                     }
                 }
                 else {
