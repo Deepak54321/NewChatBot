@@ -352,7 +352,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                     }
 
                                 }
-                                sendTextMessage(sender,StateId);
+                                //sendTextMessage(sender,StateId);
                                 //3
 
 
@@ -381,7 +381,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 console(log.error());
                             }
                         });
-                       
+
                     }
                 }
                 else {
