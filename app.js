@@ -325,7 +325,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                         //let view=state+city+country+'Hi now you can get your dealers'+lat+lng;
                         //2
                         request({
-                            url:'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/statewiseprice/getprice?product_profile_id=salutorxspcol&state_id=240'
+                            url:'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/state'
                         },function (error,response,body) {
                             if (!error && response.statusCode == 200) {
                                 var res = JSON.parse(body);
@@ -342,7 +342,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 //sendTextMessage(sender,StateId);
                                 //3
                                 request({
-                                    url:'https://maps.googleapis.com/maps/api/geocode/json?address='+pincode+'&key=AIzaSyD_YqB4d_-xKcmNP9jJCiPkJYDS8J3f6pI'
+                                    url:'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/city?profile_id='+StateId
                                 },function (error,response,body)
                                 {
                                     if (!error && response.statusCode == 200) {
@@ -356,6 +356,9 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                             }
 
                                         }
+                                    }
+                                    else {
+                                        console(log.error());
                                     }
                                 });
                                 var message =StateId+CityId;
