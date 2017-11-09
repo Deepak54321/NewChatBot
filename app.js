@@ -314,8 +314,11 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                         var stateF = address.split(',',2)[1];
                         var state=stateF.split(' ',2)[1];
                         var city=address.split(',',1)[0];
+                        var location=address.geometry.location;
+                        var lat=location.lat;
+                        var lng=location.lng;
                         console.log(city);
-                        let view=state+city+country+'Hi now you can get your dealers';
+                        let view=state+city+country+'Hi now you can get your dealers'+lat+lng;
                         sendTextMessage(sender,view);
                     }
                 }
