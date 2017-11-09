@@ -310,11 +310,12 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     let Results=result.results;
                     for(var i=0;i<Results.length;i++) {
                         var address = Results[i].formatted_address;
-                        var city = address.split(',', 1)[0];
-                        var state=address.split(',',2)[0];
-                        var country=address.split(',',4)[0];
+                        var country=address.split(',',3)[2];
+                        var stateF = address.split(',',2)[1];
+                        var state=stateF.split(' ',2)[1];
+                        var city=address.split(',',1)[0];
                         console.log(city);
-                        let view=state+city+'Hi now you can get your dealers';
+                        let view=state+city+country+'Hi now you can get your dealers';
                         sendTextMessage(sender,view);
                     }
                 }
