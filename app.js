@@ -354,10 +354,8 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 }
                                 //sendTextMessage(sender,StateId);
                                 //3
-
-
                                 request({
-                                    url:'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/city?profile_id='+StateId
+                                    url:'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/city?profile_id='+StateId+''
                                 },function (error,response,body)
                                 {
                                     if (!error && response.statusCode == 200) {
@@ -370,7 +368,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                             }
                                         }
                                         var message=StateId+CityId;
-                                        sendTextMessage(sender,message);
+                                       sendTextMessage(sender,message);
                                     }
                                     else {
                                         console(log.error());
