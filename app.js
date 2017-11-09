@@ -377,8 +377,13 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                         {
                                             if (!error && response.statusCode == 200) {
                                                 var result = JSON.parse(body);
-                                                var responsData = result.responseCode;
-                                               sendTextMessage(sender,responsData);
+                                                var resData = result.responseData;
+                                                var dealers=resData.dealers;
+                                                var dealer_name=dealers[0].dealer_name;
+                                                var dealer_add=dealers[0].dealer_address;
+                                                var dealer_Mob=dealers[0].sales_manager_mobile;
+                                                var text1=dealer_name+dealer_add+dealer_Mob;
+                                               sendTextMessage(sender,text1);
                                             }
                                             else {
                                                 console(log.error());
