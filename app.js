@@ -347,7 +347,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 //sendTextMessage(sender,StateId);
                                 //3
 
-                                var message =StateId;
+                                var message =State;
                                 sendTextMessage(sender,message);
                             }
                             else {
