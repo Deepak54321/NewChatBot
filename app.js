@@ -341,18 +341,18 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 var message=states[0].state_name;
                                 //var states=responseData.states;
                                 sendTextMessage(sender,message);
-                               /* for(var i=0; i<states.length;i++)
+                               for(var i=0; i<states.length;i++)
                                 {
-                                  /*  if(states[i].state_name===State)
+                                  /*if(states[i].state_name===State)
                                     {
                                         StateId=states[i].profile_id;
                                         State_Name=states[i].state_name;
 
                                     }*/
-                                 // State_Name+=states[i].state_name;
+                                 State_Name=State_Name+states[i].state_name;
 
-                                //}
-                                //sendTextMessage(sender,StateId);
+                                }
+                                sendTextMessage(sender,State_Name);
                                 //3
 
                                 //var message =State;
