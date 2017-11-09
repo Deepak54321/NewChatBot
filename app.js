@@ -307,6 +307,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
             var Country='';
             var lat='';
             var lng='';
+            var State_Name='';
 
             var request = require('request');
             //1
@@ -326,6 +327,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                         var location=gemotry.location;
                         lat=location.lat;
                         lng=location.lng;
+
                         //console.log(city);
                         let view=State+City+Country+'Hi now you can get your dealers'+lat+lng;
                         //2
@@ -338,9 +340,11 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 var states=responseData.states;
                                 for(var i=0; i<states.length;i++)
                                 {
-                                    if(states[i].state_name==State)
+                                    if(states[i].state_name===State)
                                     {
                                         StateId=states[i].profile_id;
+                                        State_Name=states[i].state_name;
+                                        
                                     }
 
                                 }
@@ -354,7 +358,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 console(log.error());
                             }
                         });
-                       var message=StateId;
+                       var message=State+State_Name;
                        sendTextMessage(sender,message);
                     }
                 }
