@@ -433,18 +433,12 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                             "payload":"Feedback"
                         }
                     ];
-                    sendQuickReply(sender,"Your Pincode Not Found",rep);
+                    var message="Your Pincode Not Found";
+                    sendQuickReply(sender,message,rep);
                     console(log.error());
-                    console(log.error());
+                    
                 }
-                let rds =  [
-                    {
-                        "content_type":"text",
-                        "title":"Feedback",
-                        "payload":"Feedback"
-                    }
-                ];
-                sendQuickReply(sender,"Your Pincode Not Found",rds);
+
             });
             break;
         case "user":
