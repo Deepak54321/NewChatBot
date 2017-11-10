@@ -471,7 +471,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 
             });
 
-            if(dealerId==='')
+            if(StateId=='')
             {
                 let rply = [
                     {
