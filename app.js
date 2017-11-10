@@ -417,7 +417,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                                         "payload": "Feedback"
                                                     }
                                                 ];
-                                                var text2="No dealers found in your Area";
+                                                var text2="No dealers found in your Area 1";
                                                 sendQuickReply(sender,text2, rply1);
                                                 console(log.error());
                                             }
@@ -432,7 +432,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                                 "payload": "Feedback"
                                             }
                                         ];
-                                        var text3="No dealers found in your Area";
+                                        var text3="No dealers found in your Area 2";
                                         sendQuickReply(sender,text3, rply2);
                                         console(log.error());
                                     }
@@ -446,7 +446,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                         "payload": "Feedback"
                                     }
                                 ];
-                                var text4="No dealers found in your Area";
+                                var text4="No dealers found in your Area 3";
                                 sendQuickReply(sender,text4, rply3);
                                 console(log.error());
                             }
@@ -461,7 +461,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                             "payload": "Feedback"
                         }
                     ];
-                    var text5="No dealers found in your Area";
+                    var text5="No dealers found in your Area 4";
                     sendQuickReply(sender,text2, rply4);
                     console(log.error());
 
@@ -475,7 +475,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     "payload": "Feedback"
                 }
             ];
-            var text2="No dealers found in your Area";
+            var text2="No dealers found in your Area 5";
             sendQuickReply(sender,text2, rply);
             break;
         case "user":
