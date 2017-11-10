@@ -326,6 +326,9 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
             var lng='';
             var State_Name='';
             var City_Name='';
+            var address='';
+            var stateF='';
+            
 
             var request = require('request');
             //1
@@ -337,9 +340,9 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     let Results = result.results;
                     for (var i = 0; i < Results.length; i++)
                     {
-                        var address = Results[i].formatted_address;
+                         address = Results[i].formatted_address;
                         Country = address.split(',', 3)[2];
-                        var stateF = address.split(',', 2)[1];
+                        stateF = address.split(',', 2)[1];
                         State = stateF.split(' ', 2)[1];
                         City = address.split(',', 1)[0];
                         var gemotry = Results[i].geometry;
@@ -347,8 +350,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                         lat = location.lat;
                         lng = location.lng;
                     }
-                        if (State === '' || City === '')
-                        {
+                     
                         //console.log(city);
                             let view = State + City + Country + 'Hi now you can get your dealers' + lat + lng;
                         //2
@@ -430,20 +432,6 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 console(log.error());
                             }
                         });
-
-                    }
-                    else
-                        {
-                            let rep =  [
-                                {
-                                    "content_type":"text",
-                                    "title":"Feedback",
-                                    "payload":"Feedback"
-                                }
-                            ];
-                            var message="Your Pincode Not Found";
-                            sendQuickReply(sender,message,rep);
-                        }
 
                 }
                 else {
