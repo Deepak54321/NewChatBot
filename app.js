@@ -281,7 +281,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     sendQuickReply(sender,emailContent,rply);
                     //responseText=emailContent;
                 }
-                sendTextMessage(sender, responseText,rply);
+                sendQuickReply(sender,responseText,rply);
             }
             break;
         case "dealer-price":
