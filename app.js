@@ -284,6 +284,35 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                 sendQuickReply(sender,responseText,rply);
             }
             break;
+			 case "testuser-data":
+			 let testrply =  [
+                    {
+                        "content_type":"text",
+                        "title":"Restart",
+                        "payload":"Restart"
+                    }
+                ];
+            if(isDefined(contexts[0]) && contexts[0].name=='welcomeyamaha' && contexts[0].parameters) {
+                let phone_number = (isDefined(contexts[0].parameters['TNumber']) &&
+                    contexts[0].parameters['TNumber'] != '') ? contexts[0].parameters['TNumber'] : '';
+                let email = (isDefined(contexts[0].parameters['TEmail']) &&
+                    contexts[0].parameters['TEmail'] != '') ? contexts[0].parameters['TEmail'] : '';
+                let testdrive_customer_interest = (isDefined(contexts[0].parameters['TestRideCustomerInterest']) &&
+                    contexts[0].parameters['TestRideCustomerInterest'] != '') ? contexts[0].parameters['TestRideCustomerInterest'] : '';
+                let testride_Feedback = (isDefined(contexts[0].parameters['TestRideFeedback']) &&
+                    contexts[0].parameters['TestRideFeedback'] != '') ? contexts[0].parameters['TestRideFeedback'] : '';
+                let pincode=(isDefined(contexts[0].parameters['TPincode']) &&
+                    contexts[0].parameters['TPincode'] != '') ? contexts[0].parameters['TPincode'] : '';
+                
+                if (phone_number != '' && email != '') {
+                    let emailContent =  'Phone Number:=' + phone_number + 'email:=' + email + 'customer' +
+                        'Customer Interest' + testdrive_customer_interest + 'TestRide Feedback'+ testride_Feedback +'Pincode'+pincode+'';
+                    sendQuickReply(sender,emailContent,testrply);
+                    //responseText=emailContent;
+                }
+                sendTextMessage(sender, responseText);
+            }
+                break;
         case "dealer-price":
             var request = require('request');
             request({
