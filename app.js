@@ -381,14 +381,15 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                                 var dealer_add=dealers[0].dealer_address;
                                                 var dealer_Mob=dealers[0].sales_manager_mobile;
                                                 var text1=dealer_name+dealer_add+dealer_Mob;
-                                                let reply =  [
+                                                let rply =  [
                                                     {
-                                                        "content_type":"Feedback",
+                                                        "content_type":"text",
                                                         "title":"Feedback",
-                                                        "payload":text1
+                                                        "payload":"Feedback"
                                                     }
                                                 ];
-                                                sendTextMessage(sender,text1);
+                                                sendQuickReply(sender,text1,rply);
+                                                //sendTextMessage(sender,text1);
                                             }
                                             else {
                                                 console(log.error());
