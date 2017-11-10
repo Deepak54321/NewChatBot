@@ -328,6 +328,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
             var City_Name='';
             var address='';
             var stateF='';
+            var dealerId='';
 
 
             var request = require('request');
@@ -395,6 +396,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                                 var result = JSON.parse(body);
                                                 var resData = result.responseData;
                                                 var dealers = resData.dealers;
+                                                dealerId=dealers[0].dealer_name;
                                                 var dealer_name = dealers[0].dealer_name;
                                                 var dealer_add = dealers[0].dealer_address;
                                                 var dealer_Mob = dealers[0].sales_manager_mobile;
@@ -468,15 +470,22 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                 }
 
             });
-            let rply = [
-                {
-                    "content_type": "text",
-                    "title": "Feedback",
-                    "payload": "Feedback"
-                }
-            ];
-            var text2="No dealers found in your Area 5";
-            sendQuickReply(sender,text2, rply);
+          
+            if(dealerId!='')
+            {
+                sendTextMessage(sender,responseText);
+            }
+            else {
+                let rply = [
+                    {
+                        "content_type": "text",
+                        "title": "Feedback",
+                        "payload": "Feedback"
+                    }
+                ];
+                var text2 = "No dealers found in your Area Please check your pin code";
+                sendQuickReply(sender, text2, rply);
+            }
             break;
         case "user":
             sendTextMessage(sender,"Your Id"+sender.id+"");
