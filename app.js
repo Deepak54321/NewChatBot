@@ -284,9 +284,16 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     let result = JSON.parse(body);
                     let responseCode=result.responseData;
                     let productPrice=responseCode.product_price;
-                    let price=productPrice[0].price;
+                    let price=productPrice[0].price +'Rs';
                     {
-                        sendTextMessage(sender, price);
+                        let reply =  [
+                            {
+                                "content_type":"text",
+                                "title":"Feedback",
+                                "payload":"Feedback"
+                            }
+                        ];
+                        sendQuickReply(sender,price,reply);
                         //greetUserText(sender.id);
                     }
                 }
@@ -300,6 +307,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
             let dealer_pin=(isDefined(contexts[0].parameters['pincode'])&&
                 contexts[0].parameters['pincode']!='')? contexts[0].parameters['pincode']:'';
             //var pincode=110005;
+
             var StateId='';
             var CityId='';
             var City='';
