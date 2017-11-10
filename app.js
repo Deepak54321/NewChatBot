@@ -426,7 +426,15 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     }
                 }
                 else {
-
+                    let rply =  [
+                        {
+                            "content_type":"text",
+                            "title":"Feedback",
+                            "payload":"Feedback"
+                        }
+                    ];
+                    sendQuickReply(sender,"Your Pincode Not Found",rply);
+                    console(log.error());
                     console(log.error());
                 }
             });
