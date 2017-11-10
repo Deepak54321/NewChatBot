@@ -328,7 +328,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
             var City_Name='';
             var address='';
             var stateF='';
-            
+
 
             var request = require('request');
             //1
@@ -350,7 +350,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                         lat = location.lat;
                         lng = location.lng;
                     }
-                     
+
                         //console.log(city);
                             let view = State + City + Country + 'Hi now you can get your dealers' + lat + lng;
                         //2
@@ -417,33 +417,52 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                                         "payload": "Feedback"
                                                     }
                                                 ];
-                                                sendQuickReply(sender, "No dealers found in your Area", rply);
+                                                var text2="No dealers found in your Area";
+                                                sendQuickReply(sender,text2, rply);
                                                 console(log.error());
                                             }
                                         });
 
                                     }
                                     else {
+                                        let rply = [
+                                            {
+                                                "content_type": "text",
+                                                "title": "Feedback",
+                                                "payload": "Feedback"
+                                            }
+                                        ];
+                                        var text2="No dealers found in your Area";
+                                        sendQuickReply(sender,text2, rply);
                                         console(log.error());
                                     }
                                 });
                             }
                             else {
+                                let rply = [
+                                    {
+                                        "content_type": "text",
+                                        "title": "Feedback",
+                                        "payload": "Feedback"
+                                    }
+                                ];
+                                var text2="No dealers found in your Area";
+                                sendQuickReply(sender,text2, rply);
                                 console(log.error());
                             }
                         });
 
                 }
                 else {
-                    let rep =  [
+                    let rply = [
                         {
-                            "content_type":"text",
-                            "title":"Feedback",
-                            "payload":"Feedback"
+                            "content_type": "text",
+                            "title": "Feedback",
+                            "payload": "Feedback"
                         }
                     ];
-                    var message="Your Pincode Not Found";
-                    sendQuickReply(sender,message,rep);
+                    var text2="No dealers found in your Area";
+                    sendQuickReply(sender,text2, rply);
                     console(log.error());
 
                 }
