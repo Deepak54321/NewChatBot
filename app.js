@@ -480,7 +480,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                         "payload": "Feedback"
                     }
                 ];
-                var text2 = "No dealers found in your Area Please check your pin code";
+                var text2 = "No dealers found in your Area Please check your pin code"+dealerId;
                 sendQuickReply(sender, text2, rply);
 
             }
