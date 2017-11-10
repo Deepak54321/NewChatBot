@@ -400,6 +400,14 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                                 //sendTextMessage(sender,text1);
                                             }
                                             else {
+                                                let rply =  [
+                                                    {
+                                                        "content_type":"text",
+                                                        "title":"Feedback",
+                                                        "payload":"Feedback"
+                                                    }
+                                                ];
+                                                sendQuickReply(sender,"No dealers found in your Area",rply);
                                                 console(log.error());
                                             }
                                         });
@@ -418,7 +426,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     }
                 }
                 else {
-                    sendTextMessage(sender,"you have entered wrong pin codes");
+
                     console(log.error());
                 }
             });
