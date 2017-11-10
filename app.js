@@ -426,17 +426,25 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     }
                 }
                 else {
-                    let rply =  [
+                    let rep =  [
                         {
                             "content_type":"text",
                             "title":"Feedback",
                             "payload":"Feedback"
                         }
                     ];
-                    sendQuickReply(sender,"Your Pincode Not Found",rply);
+                    sendQuickReply(sender,"Your Pincode Not Found",rep);
                     console(log.error());
                     console(log.error());
                 }
+                let rds =  [
+                    {
+                        "content_type":"text",
+                        "title":"Feedback",
+                        "payload":"Feedback"
+                    }
+                ];
+                sendQuickReply(sender,"Your Pincode Not Found",rds);
             });
             break;
         case "user":
