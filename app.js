@@ -470,12 +470,9 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                 }
 
             });
-          
-            if(dealerId!='')
+
+            if(dealerId==='')
             {
-                sendTextMessage(sender,responseText);
-            }
-            else {
                 let rply = [
                     {
                         "content_type": "text",
@@ -485,6 +482,10 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                 ];
                 var text2 = "No dealers found in your Area Please check your pin code";
                 sendQuickReply(sender, text2, rply);
+
+            }
+            else {
+                sendTextMessage(sender,responseText);
             }
             break;
         case "user":
