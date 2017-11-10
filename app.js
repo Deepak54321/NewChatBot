@@ -265,7 +265,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                 let lattitude=(isDefined(contexts[0].parameters['lattitude']) &&
                     contexts[0].parameters['longitude'] != '') ? contexts[0].parameters['longitude'] : '';
                 let longitude=(isDefined(contexts[0].parameters['longitude']) &&
-                        contexts[0].parameters['longitude'] != '') ? contexts[0].parameters['longitude'] : '';
+                    contexts[0].parameters['longitude'] != '') ? contexts[0].parameters['longitude'] : '';
                 if (phone_number != '' && email != '') {
                     let emailContent =  'Phone Number:=' + phone_number + 'email:=' + email + 'customer' +
                         'Customer Interest' + product_customer_interest + 'Product_Feedback '+ Product_Enquiry_Feedback +'lattitude'+lattitude+'';
@@ -274,7 +274,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                 }
                 sendTextMessage(sender, responseText);
             }
-                break;
+            break;
         case "dealer-price":
             var request = require('request');
             request({
@@ -296,7 +296,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
             });
             break;
         case "dealer-info":
-           // let dealer_pin= contexts[0].parameters['pincode'];
+            // let dealer_pin= contexts[0].parameters['pincode'];
             let dealer_pin=(isDefined(contexts[0].parameters['pincode'])&&
                 contexts[0].parameters['pincode']!='')? contexts[0].parameters['pincode']:'';
             var pincode=110005;
@@ -332,19 +332,17 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                         //console.log(city);
                         let view=State+City+Country+'Hi now you can get your dealers'+lat+lng;
                         //2
-                       request({
+                        request({
                             url:'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/state'
                         },function (error,response,body) {
                             if (!error && response.statusCode == 200) {
                                 var res = JSON.parse(body);
                                 var responseData=res.responseData;
                                 var states=responseData.states;
-                                //var message=states[0].state_name;
-                                //var states=responseData.states;
-                                //sendTextMessage(sender,message);
-                               for(var i=0; i<states.length;i++)
+
+                                for(var i=0; i<states.length;i++)
                                 {
-                                  if(states[i].state_name===State)
+                                    if(states[i].state_name===State)
                                     {
                                         StateId=states[i].profile_id;
                                         State_Name=states[i].state_name;
@@ -362,14 +360,14 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                         var result = JSON.parse(body);
                                         var responsData = result.responseData;
                                         var citites = responsData.cities;
-                                       for (var i = 0; i < citites.length; i++) {
+                                        for (var i = 0; i < citites.length; i++) {
 
                                             if (citites[i].city_name == City) {
                                                 CityId = citites[i].city_profile_id;
                                             }
                                         }
                                         //var message=StateId+CityId;
-                                       //sendTextMessage(sender,message);
+                                        //sendTextMessage(sender,message);
 
                                         request({
                                             url:'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/search?type=sales&profile_id='+StateId+'&city_profile_id='+CityId
@@ -383,7 +381,14 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                                 var dealer_add=dealers[0].dealer_address;
                                                 var dealer_Mob=dealers[0].sales_manager_mobile;
                                                 var text1=dealer_name+dealer_add+dealer_Mob;
-                                               sendTextMessage(sender,text1);
+                                                let reply =  [
+                                                    {
+                                                        "content_type":"Feedback",
+                                                        "title":"Feedback",
+                                                        "payload":text1
+                                                    }
+                                                ];
+                                                sendTextMessage(sender,text1);
                                             }
                                             else {
                                                 console(log.error());
