@@ -254,6 +254,13 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
             break;
         case "user-data":
             if(isDefined(contexts[0]) && contexts[0].name=='welcomeyamaha' && contexts[0].parameters) {
+                let rply =  [
+                    {
+                        "content_type":"text",
+                        "title":"Restart",
+                        "payload":"Restart"
+                    }
+                ];
                 let phone_number = (isDefined(contexts[0].parameters['ProductPhoneNumber']) &&
                     contexts[0].parameters['ProductPhoneNumber'] != '') ? contexts[0].parameters['ProductPhoneNumber'] : '';
                 let email = (isDefined(contexts[0].parameters['ProductEmail']) &&
@@ -269,10 +276,12 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                 if (phone_number != '' && email != '') {
                     let emailContent =  'Phone Number:=' + phone_number + 'email:=' + email + 'customer' +
                         'Customer Interest' + product_customer_interest + 'Product_Feedback '+ Product_Enquiry_Feedback +'lattitude'+lattitude+'';
-                    sendTextMessage(sender, emailContent);
+                   // sendTextMessage(sender, emailContent);
+
+                    sendQuickReply(sender,emailContent,rply);
                     //responseText=emailContent;
                 }
-                sendTextMessage(sender, responseText);
+                sendTextMessage(sender, responseText,rply);
             }
             break;
         case "dealer-price":
@@ -436,7 +445,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     var message="Your Pincode Not Found";
                     sendQuickReply(sender,message,rep);
                     console(log.error());
-                    
+
                 }
 
             });
