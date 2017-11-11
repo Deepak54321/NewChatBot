@@ -457,7 +457,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                             console(log.error());
                                         }
                                     });
-                                    if(StateId==''|| CityId=='' || dealerId=='')
+                                   /* if(StateId==''|| CityId=='' || dealerId=='')
                                     {
                                         let reply = [
                                             {
@@ -467,7 +467,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                             }
                                         ];
                                         sendQuickReply(sender,"No Dealers found in you area ....", rply);
-                                    }
+                                    }*/
 
                                 }
                                 else {
