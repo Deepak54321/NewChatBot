@@ -358,18 +358,19 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                 if (!error && response.statusCode == 200) {
                     var result = JSON.parse(body);
                     var Results = result.results;
-                    address_components = Results[0].address_components;
-                    var len = address_components.length;
-                    for (var j = 0; j < address_components.length; j++) {
-                        if(j==len-3)
-                        {
-                            City=address_components[j].long_name;
-                        }
-                        else if (j == len - 2) {
-                            State = address_components[j].long_name;
-                        }
-                        else if (j == len - 1) {
-                            Country = address_components[j].long_name;
+                    for (var i = 0; i < Results.length; i++) {
+                        address_components = Results[i].address_components;
+                        var len = address_components.length;
+                        for (var j = 0; j < address_components.length; j++) {
+                            if (j == len - 3) {
+                                City = address_components[j].long_name;
+                            }
+                            else if (j == len - 2) {
+                                State = address_components[j].long_name;
+                            }
+                            else if (j == len - 1) {
+                                Country = address_components[j].long_name;
+                            }
                         }
                     }
                 }
