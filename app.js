@@ -370,14 +370,21 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                         address = Results[i].formatted_address;
                         address_components = Results[i].address_components;
                         var len = address_components.length;
-                        Country = address.split(',', 3)[2];
-                        stateF = address.split(',', 2)[1];
-                        State = stateF.split(' ', 2)[1];
-                        City = address.split(',', 1)[0];
                         var gemotry = Results[i].geometry;
                         var location = gemotry.location;
                         lat = location.lat;
                         lng = location.lng;
+                        for (var j = 0; j < address_components.length; j++) {
+                            if (j == len - 3) {
+                                City = address_components[j].long_name;
+                            }
+                            else if (j == len - 2) {
+                                State = address_components[j].long_name;
+                            }
+                            else if (j == len - 1) {
+                                Country = address_components[j].long_name;
+                            }
+                        }
                     }
 
                     //console.log(city);
