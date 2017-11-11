@@ -338,7 +338,8 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
             break;
         case "dealer-info":
             // let dealer_pin= contexts[0].parameters['pincode'];
-            let dealer_pin=(isDefined(contexts[0].parameters['pincode']) && contexts[0].parameters['pincode']!='')? contexts[0].parameters['pincode']:'';
+            let dealer_pin=(isDefined(contexts[0].parameters['pincode'])&&
+                contexts[0].parameters['pincode']!='')? contexts[0].parameters['pincode']:'';
             //var pincode=110005;
 
             var StateId='';
@@ -420,7 +421,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                             CityId = citites[i].city_profile_id;
                                         }
                                     }
-                                   
+
                                     //var message=StateId+CityId;
                                     //sendTextMessage(sender,message);
 
@@ -456,6 +457,17 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                             console(log.error());
                                         }
                                     });
+                                    if(StateId==''|| CityId=='' || dealerId=='')
+                                    {
+                                        let reply = [
+                                            {
+                                                "content_type": "text",
+                                                "title": "Feedback",
+                                                "payload": "Feedback"
+                                            }
+                                        ];
+                                        sendQuickReply(sender,"No Dealers found in you area ....", rply);
+                                    }
 
                                 }
                                 else {
