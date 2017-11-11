@@ -342,7 +342,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
         case "dealer-info":
             // let dealer_pin= contexts[0].parameters['pincode'];
             //let dealer_pin=(isDefined(contexts[0].parameters['pincode'])&&
-                contexts[0].parameters['pincode']!='')? contexts[0].parameters['pincode']:'';
+                //contexts[0].parameters['pincode']!='')? contexts[0].parameters['pincode']:'';
             var pincode=110005;
             var StateId='';
             var CityId='';
