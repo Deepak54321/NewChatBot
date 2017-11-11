@@ -459,6 +459,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                 }
             ];
             sendQuickReply(sender,message, reply);*/
+             sendTextMessage(sender,State+City+Country);
             break;
         case "user":
             sendTextMessage(sender,"Your Id"+sender.id+"");
