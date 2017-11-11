@@ -359,7 +359,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
             var address_components='';
             var message='';
             var request = require('request');
-            
+
             //get state city and country information
             request({
                 url:'https://maps.googleapis.com/maps/api/geocode/json?address='+pincode+'&key=AIzaSyD_YqB4d_-xKcmNP9jJCiPkJYDS8J3f6pI'
@@ -383,7 +383,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     }
                 }
             });
-            //2 get 
+            //2 get
             request({
                 url: 'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/state'
             }, function (error, response, body) {
@@ -421,7 +421,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
             );
             //4
             request({
-                url: 'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/search?type=sales&profile_id=delhi&city_profile_id=new_delhi'
+                url: 'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/search?type=sales&profile_id=' + StateId + '&city_profile_id=' + CityId
             }, function (error, response, body) {
                 if (!error && response.statusCode == 200) {
                     var result = JSON.parse(body);
