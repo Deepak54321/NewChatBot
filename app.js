@@ -344,7 +344,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
             var StateId='';
             var CityId='';
             var City='';
-            var State='Delhi';
+            var State='';
             var Country='';
             var dealerId='';
             var address_components='';
@@ -358,10 +358,10 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                 if (!error && response.statusCode == 200) {
                     var result = JSON.parse(body);
                     var Results = result.results;
-                    for (var i = 0; i < Results.length; i++) {
-                        address_components = Results[i].address_components;
+                        address_components = Results[0].address_components;
                         var len = address_components.length;
-                        for (var j = 0; j < address_components.length; j++) {
+                        dealerId=address_components[0].long_name;
+                        /*for (var j = 0; j < address_components.length; j++) {
                             if (j == len - 3) {
                                 City = address_components[j].long_name;
                             }
@@ -371,8 +371,8 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                             else if (j == len - 1) {
                                 Country = address_components[j].long_name;
                             }
-                        }
-                    }
+                        }*/
+
                 }
             });
             //2 get
@@ -460,7 +460,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                 }
             ];
             sendQuickReply(sender,message, reply);*/
-             sendTextMessage(sender,State+City+Country);
+             sendTextMessage(sender,dealerId+"Hello");
             break;
         case "user":
             sendTextMessage(sender,"Your Id"+sender.id+"");
