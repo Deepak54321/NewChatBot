@@ -262,21 +262,18 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                 ];
                 let phone_number = (isDefined(contexts[0].parameters['ProductPhoneNumber']) &&
                     contexts[0].parameters['ProductPhoneNumber'] != '') ? contexts[0].parameters['ProductPhoneNumber'] : '';
-                let email = (isDefined(contexts[0].parameters['ProductEmail']) &&
-                    contexts[0].parameters['ProductEmail'] != '') ? contexts[0].parameters['ProductEmail'] : '';
+                let email = (isDefined(contexts[0].parameters['ProductEnquiryEmail']) &&
+                    contexts[0].parameters['ProductEnquiryEmail'] != '') ? contexts[0].parameters['ProductEnquiryEmail'] : '';
                 let product_customer_interest = (isDefined(contexts[0].parameters['ProductCustomerInterest']) &&
                     contexts[0].parameters['ProductCustomerInterest'] != '') ? contexts[0].parameters['ProductCustomerInterest'] : '';
                 let Product_Enquiry_Feedback = (isDefined(contexts[0].parameters['ProductEnquiryFeedback']) &&
                     contexts[0].parameters['ProductEnquiryFeedback'] != '') ? contexts[0].parameters['ProductEnquiryFeedback'] : '';
-                let lattitude=(isDefined(contexts[0].parameters['lattitude']) &&
-                    contexts[0].parameters['longitude'] != '') ? contexts[0].parameters['longitude'] : '';
-                let longitude=(isDefined(contexts[0].parameters['longitude']) &&
-                    contexts[0].parameters['longitude'] != '') ? contexts[0].parameters['longitude'] : '';
+                let lattitude=(isDefined(contexts[0].parameters['pincode']) &&
+                    contexts[0].parameters['pincode'] != '') ? contexts[0].parameters['pincode'] : '';
                 if (phone_number != '' && email != '') {
                     let emailContent =  'Phone Number:=' + phone_number + 'email:=' + email + 'customer' +
-                        'Customer Interest' + product_customer_interest + 'Product_Feedback '+ Product_Enquiry_Feedback +'lattitude'+lattitude+'';
+                        'Customer Interest' + product_customer_interest + 'Product_Feedback '+ Product_Enquiry_Feedback +'Pin Code'+lattitude+'';
                     // sendTextMessage(sender, emailContent);
-
                     sendQuickReply(sender,emailContent,rply);
                     //responseText=emailContent;
                 }
@@ -292,16 +289,16 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                 }
             ];
             if(isDefined(contexts[0]) && contexts[0].name=='welcomeyamaha' && contexts[0].parameters) {
-                let phone_number = (isDefined(contexts[0].parameters['TNumber']) &&
-                    contexts[0].parameters['TNumber'] != '') ? contexts[0].parameters['TNumber'] : '';
-                let email = (isDefined(contexts[0].parameters['TEmail']) &&
-                    contexts[0].parameters['TEmail'] != '') ? contexts[0].parameters['TEmail'] : '';
+                let phone_number = (isDefined(contexts[0].parameters['testphonenumber']) &&
+                    contexts[0].parameters['testphonenumber'] != '') ? contexts[0].parameters['testphonenumber'] : '';
+                let email = (isDefined(contexts[0].parameters['TestEmail']) &&
+                    contexts[0].parameters['TestEmail'] != '') ? contexts[0].parameters['TestEmail'] : '';
                 let testdrive_customer_interest = (isDefined(contexts[0].parameters['TestRideCustomerInterest']) &&
                     contexts[0].parameters['TestRideCustomerInterest'] != '') ? contexts[0].parameters['TestRideCustomerInterest'] : '';
                 let testride_Feedback = (isDefined(contexts[0].parameters['TestRideFeedback']) &&
                     contexts[0].parameters['TestRideFeedback'] != '') ? contexts[0].parameters['TestRideFeedback'] : '';
-                let pincode=(isDefined(contexts[0].parameters['TPincode']) &&
-                    contexts[0].parameters['TPincode'] != '') ? contexts[0].parameters['TPincode'] : '';
+                let pincode=(isDefined(contexts[0].parameters['TestPincode']) &&
+                    contexts[0].parameters['TestPincode'] != '') ? contexts[0].parameters['TestPincode'] : '';
 
                 if (phone_number != '' && email != '') {
                     let emailContent =  'Phone Number:=' + phone_number + 'email:=' + email + 'customer' +
