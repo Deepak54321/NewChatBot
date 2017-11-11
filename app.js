@@ -354,7 +354,8 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
             var address='';
             var stateF='';
             var dealerId='';
-
+            var address_components='';
+            var message='';
 
             var request = require('request');
             //1
@@ -367,6 +368,8 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     for (var i = 0; i < Results.length; i++)
                     {
                         address = Results[i].formatted_address;
+                        address_components = Results[i].address_components;
+                        var len = address_components.length;
                         Country = address.split(',', 3)[2];
                         stateF = address.split(',', 2)[1];
                         State = stateF.split(' ', 2)[1];
@@ -466,7 +469,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 
             });
 
-          
+
             break;
         case "user":
             sendTextMessage(sender,"Your Id"+sender.id+"");
