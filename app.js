@@ -352,7 +352,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
             var request = require('request');
 
             //get state city and country information
-            /*request({
+            request({
                 url:'https://maps.googleapis.com/maps/api/geocode/json?address='+pincode+'&key=AIzaSyD_YqB4d_-xKcmNP9jJCiPkJYDS8J3f6pI'
             },function (error,response,body) {
                 if (!error && response.statusCode == 200) {
@@ -374,9 +374,9 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                         }
                     }
                 }
-            });*/
+            });
             //2 get
-            request({
+          /*  request({
                 url: 'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/state'
             }, function (error, response, body) {
                 if (!error && response.statusCode == 200) {
@@ -385,7 +385,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     var states = responseData.states;
 
                     for (var i = 0; i < states.length; i++) {
-                        if (states[i].state_name === State) {
+                        if (states[i].state_name == State) {
                             StateId = states[i].profile_id;
                             //State_Name = states[i].state_name;
 
@@ -393,7 +393,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 
                     }
                 }
-            });
+            });*/
             //3
             /*request({
                     url: 'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/city?profile_id=' + StateId
@@ -460,7 +460,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                 }
             ];
             sendQuickReply(sender,message, reply);*/
-             sendTextMessage(sender,State+StateId);
+             sendTextMessage(sender,State+City+Country);
             break;
         case "user":
             sendTextMessage(sender,"Your Id"+sender.id+"");
