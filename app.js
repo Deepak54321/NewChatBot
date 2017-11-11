@@ -436,10 +436,26 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     if(text1!='')
                     {
                         message=text1;
+                        let rply = [
+                            {
+                                "content_type": "text",
+                                "title": "Feedback",
+                                "payload": "Feedback"
+                            }
+                        ];
+                        sendQuickReply(sender,message, rply);
                     }
                     else
                     {
                         message='No dealers Found';
+                        let reply = [
+                            {
+                                "content_type": "text",
+                                "title": "Feedback",
+                                "payload": "Feedback"
+                            }
+                        ];
+                        sendQuickReply(sender,message, reply);
                     }
                 }
             });
