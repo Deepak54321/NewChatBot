@@ -450,7 +450,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     }
                 }
             });*/
-              message=State+City+Country;
+             /* message=State+City+Country;
             let reply = [
                 {
                     "content_type": "text",
@@ -458,7 +458,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     "payload": "Feedback"
                 }
             ];
-            sendQuickReply(sender,message, reply);
+            sendQuickReply(sender,message, reply);*/
             break;
         case "user":
             sendTextMessage(sender,"Your Id"+sender.id+"");
