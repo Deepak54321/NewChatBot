@@ -433,85 +433,40 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                                     "payload": "Feedback"
                                                 }
                                             ];
-                                            sendQuickReply(sender, text1, rply);
+                                            if(text1!='') {
+                                                sendQuickReply(sender, text1, rply);
+                                            }
+                                            else
+                                            {
+                                                sendQuickReply(sender,"No dealers Found in your area", rply);
+                                            }
                                             //sendTextMessage(sender,text1);
                                         }
                                         else {
-                                            let rply1 = [
-                                                {
-                                                    "content_type": "text",
-                                                    "title": "Feedback",
-                                                    "payload": "Feedback"
-                                                }
-                                            ];
-                                            var text2="No dealers found in your Area 1";
-                                            sendQuickReply(sender,text2, rply1);
                                             console(log.error());
                                         }
                                     });
 
                                 }
                                 else {
-                                    let rply2 = [
-                                        {
-                                            "content_type": "text",
-                                            "title": "Feedback",
-                                            "payload": "Feedback"
-                                        }
-                                    ];
-                                    var text3="No dealers found in your Area 2";
-                                    sendQuickReply(sender,text3, rply2);
                                     console(log.error());
                                 }
                             });
                         }
                         else {
-                            let rply3 = [
-                                {
-                                    "content_type": "text",
-                                    "title": "Feedback",
-                                    "payload": "Feedback"
-                                }
-                            ];
-                            var text4="No dealers found in your Area 3";
-                            sendQuickReply(sender,text4, rply3);
                             console(log.error());
                         }
                     });
 
                 }
                 else {
-                    let rply4 = [
-                        {
-                            "content_type": "text",
-                            "title": "Feedback",
-                            "payload": "Feedback"
-                        }
-                    ];
-                    var text5="No dealers found in your Area 4";
-                    sendQuickReply(sender,text2, rply4);
                     console(log.error());
 
                 }
 
             });
 
-            if(dealerId==='')
-            {
-                let rply = [
-                    {
-                        "content_type": "text",
-                        "title": "Feedback",
-                        "payload": "Feedback"
-                    }
-                ];
-                var text2 = "No dealers found in your Area Please check your pin code"+dealerId;
-                sendQuickReply(sender, text2, rply);
-
-            }
-            else {
-                sendTextMessage(sender,responseText);
-            }
+          
             break;
         case "user":
             sendTextMessage(sender,"Your Id"+sender.id+"");
