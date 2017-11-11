@@ -364,8 +364,9 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                 if (!error && response.statusCode == 200) {
                     let result = JSON.parse(body);
                     let Results = result.results;
-                    
-                        address = Results[0].formatted_address;
+                    for (var i = 0; i < Results.length; i++)
+                    {
+                        address = Results[i].formatted_address;
                         Country = address.split(',', 3)[2];
                         stateF = address.split(',', 2)[1];
                         State = stateF.split(' ', 2)[1];
@@ -374,7 +375,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                         var location = gemotry.location;
                         lat = location.lat;
                         lng = location.lng;
-                    
+                    }
 
                     //console.log(city);
                     let view = State + City + Country + 'Hi now you can get your dealers' + lat + lng;
@@ -465,7 +466,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 
             });
 
-
+          
             break;
         case "user":
             sendTextMessage(sender,"Your Id"+sender.id+"");
