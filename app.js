@@ -349,12 +349,6 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
             var City='';
             var State='';
             var Country='';
-            var lat='';
-            var lng='';
-            var State_Name='';
-            var City_Name='';
-            var address='';
-            var stateF='';
             var dealerId='';
             var address_components='';
             var message='';
@@ -468,7 +462,6 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                 }
             ];
             sendQuickReply(sender,message, reply);
-           //sendTextMessage(sender,message);
             break;
         case "user":
             sendTextMessage(sender,"Your Id"+sender.id+"");
