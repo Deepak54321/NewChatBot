@@ -406,6 +406,17 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 }
 
                             }
+                            let reply1 = [
+                                {
+                                    "content_type": "text",
+                                    "title": "Feedback",
+                                    "payload": "Feedback"
+                                }
+                            ];
+                            if(StateId=='') {
+                                sendQuickReply(sender,"No Dealers found in area", reply1);
+                            }
+
                             //sendTextMessage(sender,StateId);
                             //3
                             request({
@@ -421,6 +432,17 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                             CityId = citites[i].city_profile_id;
                                         }
                                     }
+                                    let reply = [
+                                        {
+                                            "content_type": "text",
+                                            "title": "Feedback",
+                                            "payload": "Feedback"
+                                        }
+                                    ];
+                                    if(CityId=='') {
+                                        sendQuickReply(sender,"No Dealers found in area", reply);
+                                    }
+                                   
                                     //var message=StateId+CityId;
                                     //sendTextMessage(sender,message);
 
