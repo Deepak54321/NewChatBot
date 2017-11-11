@@ -384,7 +384,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                 }
             });
             //2 get
-            request({
+           /* request({
                 url: 'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/state'
             }, function (error, response, body) {
                 if (!error && response.statusCode == 200) {
@@ -401,9 +401,9 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 
                     }
                 }
-            });
+            });*/
             //3
-            request({
+            /*request({
                     url: 'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/city?profile_id=' + StateId
                 }, function (error, response, body) {
                     if (!error && response.statusCode == 200) {
@@ -418,7 +418,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                         }
                     }
                 }
-            );
+            );*/
             //4
            /* request({
                 url: 'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/search?type=sales&profile_id=' + StateId + '&city_profile_id=' + CityId
@@ -459,8 +459,16 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     }
                 }
             });*/
-           message=StateId+CityId;
-           sendTextMessage(sender,message);
+              message=State+City+Country;
+            let reply = [
+                {
+                    "content_type": "text",
+                    "title": "Feedback",
+                    "payload": "Feedback"
+                }
+            ];
+            sendQuickReply(sender,message, reply);
+           //sendTextMessage(sender,message);
             break;
         case "user":
             sendTextMessage(sender,"Your Id"+sender.id+"");
