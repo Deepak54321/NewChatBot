@@ -344,7 +344,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
             var StateId='';
             var CityId='';
             var City='';
-            var State='';
+            var State='Delhi';
             var Country='';
             var dealerId='';
             var address_components='';
@@ -352,7 +352,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
             var request = require('request');
 
             //get state city and country information
-            request({
+            /*request({
                 url:'https://maps.googleapis.com/maps/api/geocode/json?address='+pincode+'&key=AIzaSyD_YqB4d_-xKcmNP9jJCiPkJYDS8J3f6pI'
             },function (error,response,body) {
                 if (!error && response.statusCode == 200) {
@@ -374,9 +374,9 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                         }
                     }
                 }
-            });
+            });*/
             //2 get
-           /* request({
+            request({
                 url: 'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/state'
             }, function (error, response, body) {
                 if (!error && response.statusCode == 200) {
@@ -393,7 +393,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 
                     }
                 }
-            });*/
+            });
             //3
             /*request({
                     url: 'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/city?profile_id=' + StateId
@@ -460,7 +460,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                 }
             ];
             sendQuickReply(sender,message, reply);*/
-             sendTextMessage(sender,State+City+Country);
+             sendTextMessage(sender,State+StateId);
             break;
         case "user":
             sendTextMessage(sender,"Your Id"+sender.id+"");
