@@ -406,6 +406,17 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 }
 
                             }
+							let reply2 = [
+                                                {
+                                                    "content_type": "text",
+                                                    "title": "Restart",
+                                                    "payload": "Restart"
+                                                }
+                                            ];
+                                            if(StateId=='') {
+                                                       sendQuickReply(sender,"No dealers Found in your area Please restart your conversation", reply2);
+                                            }
+                                           
                             //sendTextMessage(sender,StateId);
                             //3
                             request({
@@ -421,6 +432,16 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                             CityId = citites[i].city_profile_id;
                                         }
                                     }
+									let reply3 = [
+                                                {
+                                                    "content_type": "text",
+                                                    "title": "Restart",
+                                                    "payload": "Restart"
+                                                }
+                                            ];
+                                            if(CityId=='') {
+                                                       sendQuickReply(sender,"No dealers Found in your area Please restart your conversation", reply3);
+                                            }
 
                                     //var message=StateId+CityId;
                                     //sendTextMessage(sender,message);
