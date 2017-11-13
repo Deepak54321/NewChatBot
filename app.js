@@ -1036,8 +1036,7 @@ function greetUserText(userId) {
                             } else {
                                 console.log('rows: ' + result.rows.length);
                                 if (result.rows.length === 0) {
-                                    let sql = 'INSERT INTO users (fb_id, first_name, last_name, profile_pic, ' +
-                                        'locale, timezone, gender) VALUES ($1, $2, $3, $4, $5, $6, $7)';
+                                    let sql = 'INSERT INTO users (fb_id, first_name, last_name, profile_pic,locale, timezone, gender) VALUES ($1, $2, $3, $4, $5, $6, $7)';
                                     console.log('sql: ' + sql);
                                     client.query(sql,
                                         [
@@ -1051,8 +1050,7 @@ function greetUserText(userId) {
                                         ]);
                                 }
                             }
-                        }
-                        );
+                        });
                      done();
                 });
                 pool.end();
