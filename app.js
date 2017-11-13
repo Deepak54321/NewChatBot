@@ -1021,7 +1021,7 @@ function greetUserText(userId) {
             if (user.first_name) {
                 console.log("FB user: %s %s, %s",
                     user.first_name, user.last_name, user.gender);
-           /*     var pool = new pg.Pool(config.PG_CONFIG);
+            var pool = new pg.Pool(config.PG_CONFIG);
                 pool.connect(function(err, client, done) {
                     if (err) {
                         return console.error('Error acquiring client', err.stack);
@@ -1052,7 +1052,7 @@ function greetUserText(userId) {
                         });
                      done();
                 });
-                pool.end();*/
+                pool.end();
 
                 //contexts[0].parameters['UserName'] = user.first_name;
                 let message=user.first_name +" I am your Bot your Bot Please Choose One of the following options";
