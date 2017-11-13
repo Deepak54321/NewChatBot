@@ -1051,8 +1051,9 @@ function greetUserText(userId) {
                                         ]);
                                 }
                             }
-                        });
-
+                        }
+                        );
+                     done();
                 });
                 pool.end();
 
