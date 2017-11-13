@@ -5,4 +5,13 @@ module.exports = {
     FB_APP_ID: '119860778703810',
     FB_APP_SECRET: '98132183cd766258a76f5fb6ddb3030a',
     SERVER_URL: "https://dychatbot.herokuapp.com",
+    PG_CONFIG: {
+                user:'hplemmqnodrktw',
+                database:'d1d9dpk0dupij6',
+                password:'46fecc18d4edb226ae70341dddb67303f980b4992be13d1512b967e9d1c26656',
+                host:'ec2-54-243-252-232.compute-1.amazonaws.com'
+                port:5432,
+                max:10,
+                idleTimeoutMillis:30000,
+              },
 };
