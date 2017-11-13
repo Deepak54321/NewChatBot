@@ -309,6 +309,35 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                 sendTextMessage(sender, responseText);
             }
             break;
+        case "complaintuser-data":
+            let comrply =  [
+                {
+                    "content_type":"text",
+                    "title":"Restart",
+                    "payload":"Restart"
+                }
+            ];
+            if(isDefined(contexts[0]) && contexts[0].name=='welcomeyamaha' && contexts[0].parameters) {
+                let phone_number = (isDefined(contexts[0].parameters['complaintphonenumber']) &&
+                    contexts[0].parameters['complaintphonenumber'] != '') ? contexts[0].parameters['complaintphonenumber'] : '';
+                let email = (isDefined(contexts[0].parameters['ComplaintEmail']) &&
+                    contexts[0].parameters['ComplaintEmail'] != '') ? contexts[0].parameters['ComplaintEmail'] : '';
+                let Complaint_ChasisNo = (isDefined(contexts[0].parameters['ComplaintChasisNo']) &&
+                    contexts[0].parameters['ComplaintChasisNo'] != '') ? contexts[0].parameters['ComplaintChasisNo'] : '';
+                let testride_Feedback = (isDefined(contexts[0].parameters['ComplaintFeedback']) &&
+                    contexts[0].parameters['ComplaintFeedback'] != '') ? contexts[0].parameters['ComplaintFeedback'] : '';
+                let Complaint_Model_Name=(isDefined(contexts[0].parameters['ComplaintModelName']) &&
+                    contexts[0].parameters['ComplaintModelName'] != '') ? contexts[0].parameters['ComplaintModelName'] : '';
+
+                if (phone_number != '' && email != '') {
+                    let emailContent =  'Phone Number:=' + phone_number + 'email:=' + email + 'customer' +
+                        'Complaint Chasis No' + Complaint_ChasisNo + 'Complaint Feedback'+ ComplaintFeedback +'Complaint Model'+Complaint_Model_Name+'';
+                    sendQuickReply(sender,emailContent,comrply);
+                    //responseText=emailContent;
+                }
+                sendTextMessage(sender, responseText);
+            }
+            break;
         case "dealer-price":
             var request = require('request');
             request({
@@ -406,17 +435,17 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 }
 
                             }
-							let reply2 = [
-                                                {
-                                                    "content_type": "text",
-                                                    "title": "Restart",
-                                                    "payload": "Restart"
-                                                }
-                                            ];
-                                            if(StateId=='') {
-                                                       sendQuickReply(sender,"No dealers Found in your area Please restart your conversation", reply2);
-                                            }
-                                           
+                            let reply2 = [
+                                {
+                                    "content_type": "text",
+                                    "title": "Restart",
+                                    "payload": "Restart"
+                                }
+                            ];
+                            if(StateId=='') {
+                                sendQuickReply(sender,"No dealers Found in your area Please restart your conversation", reply2);
+                            }
+
                             //sendTextMessage(sender,StateId);
                             //3
                             request({
@@ -432,16 +461,16 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                             CityId = citites[i].city_profile_id;
                                         }
                                     }
-									let reply3 = [
-                                                {
-                                                    "content_type": "text",
-                                                    "title": "Restart",
-                                                    "payload": "Restart"
-                                                }
-                                            ];
-                                            if(CityId=='') {
-                                                       sendQuickReply(sender,"No dealers Found in your area Please restart your conversation", reply3);
-                                            }
+                                    let reply3 = [
+                                        {
+                                            "content_type": "text",
+                                            "title": "Restart",
+                                            "payload": "Restart"
+                                        }
+                                    ];
+                                    if(CityId=='') {
+                                        sendQuickReply(sender,"No dealers Found in your area Please restart your conversation", reply3);
+                                    }
 
                                     //var message=StateId+CityId;
                                     //sendTextMessage(sender,message);
@@ -478,17 +507,17 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                             console(log.error());
                                         }
                                     });
-                                   /* if(StateId==''|| CityId=='' || dealerId=='')
-                                    {
-                                        let reply = [
-                                            {
-                                                "content_type": "text",
-                                                "title": "Feedback",
-                                                "payload": "Feedback"
-                                            }
-                                        ];
-                                        sendQuickReply(sender,"No Dealers found in you area ....", rply);
-                                    }*/
+                                    /* if(StateId==''|| CityId=='' || dealerId=='')
+                                     {
+                                         let reply = [
+                                             {
+                                                 "content_type": "text",
+                                                 "title": "Feedback",
+                                                 "payload": "Feedback"
+                                             }
+                                         ];
+                                         sendQuickReply(sender,"No Dealers found in you area ....", rply);
+                                     }*/
 
                                 }
                                 else {
