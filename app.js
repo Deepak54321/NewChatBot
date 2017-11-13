@@ -1075,7 +1075,7 @@ function greetUserText(userId) {
                 ];
                 sendQuickReply(userId,message,reply);
                 //sendTextMessage(userId, "Welcome " + user.first_name + '!');
-                sendQuickReply()
+               // sendQuickReply()
             } else {
                 console.log("Cannot get data for fb user with id",
                     userId);
