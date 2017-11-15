@@ -1043,20 +1043,12 @@ function greetUserText(userId) {
                         function(err, result) {
                             console.log('query result ' + result);
                             console.log("Test");
-                            if(err)
-                            {
-                                console.log("Error occurred");
-                            }
-                            else
-                            {
-                                console.log("Run success");
-                            }
                             if (err) {
                                 console.log('Query error: ' + err);
                             } else {
                                 console.log('rows: ' + result.rows.length);
                                 if (result.rows.length === 0) {
-                                    let sql = 'INSERT INTO users (fb_id, first_name, last_name, profile_pic,locale, timezone, gender) VALUES ($1, $2, $3, $4, $5, $6, $7)';
+                                   /* let sql = 'INSERT INTO users (fb_id, first_name, last_name, profile_pic,locale, timezone, gender) VALUES ($1, $2, $3, $4, $5, $6, $7)';
                                     console.log('sql: ' + sql);
                                     pgClient.query(sql,
                                         [
@@ -1067,7 +1059,11 @@ function greetUserText(userId) {
                                             user.locale,
                                             user.timezone,
                                             user.gender
-                                        ]);
+                                        ]);*/
+                                }
+                                else
+                                {
+                                    console.log("....User already present in the user list....");
                                 }
                             }
                         });
