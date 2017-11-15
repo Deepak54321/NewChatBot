@@ -1024,7 +1024,7 @@ function greetUserText(userId) {
                     user.first_name, user.last_name, user.gender);
                 console.log("UserId is %s",userId);
                 pgClient.connect();
-                var query = pgClient.query("SELECT id from users where fb_id='${userId}'",
+                var query = pgClient.query(`SELECT id FROM users WHERE fb_id='${userId}' LIMIT 1`,
                 function(err, result){
                    console.log('Record is : '+result.rowCount);
                    if(err)
