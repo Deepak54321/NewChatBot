@@ -257,7 +257,8 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
             ];
             console.log("UserId is sdlkjfsdf %s",sender);
             console.log("UID %s",SSenderId);
-            sendQuickReply(sender, responseText, reply);
+            //sendQuickReply(sender, responseText, reply);
+            greetUserText(SSenderId);
             break;
         case "user-data":
             if(isDefined(contexts[0]) && contexts[0].name=='welcomeyamaha' && contexts[0].parameters) {
