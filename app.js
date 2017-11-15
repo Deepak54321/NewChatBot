@@ -1023,17 +1023,25 @@ function greetUserText(userId) {
                 console.log("FB user: %s %s, %s",
                     user.first_name, user.last_name, user.gender);
                 console.log("UserId is %s",userId);
-            var pool = new pg.Pool(config.PG_CONFIG);
+                var pool = new pg.Pool(config.PG_CONFIG);
                 pool.connect(function(err, client, done) {
                     if (err) {
                         return console.error('Error acquiring client', err.stack);
                     }
                     var rows = [];
-                    client.query("SELECT id FROM user WHERE fb_id='${userId}' LIMIT 1",
+                    client.query("SELECT * FROM users",
                         function(err, result) {
                             console.log('query result ' + result);
                             console.log("Test");
-                            if (err) {
+                            if(err)
+                            {
+                                console.log("Error occurred");
+                            }
+                            else
+                            {
+                                console.log("Run success");
+                            }
+           /*                 if (err) {
                                 console.log('Query error: ' + err);
                             } else {
                                 console.log('rows: ' + result.rows.length);
@@ -1051,7 +1059,7 @@ function greetUserText(userId) {
                                             user.gender
                                         ]);
                                 }
-                            }
+                            } */
                         });
                      done();
                 });
