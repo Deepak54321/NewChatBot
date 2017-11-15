@@ -346,7 +346,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                 if (phone_number != '' && email != '') {
                     let emailContent =  'Phone Number:=' + phone_number + 'email:=' + email + 'customer' +
                         'Complaint Chasis No' + Complaint_ChasisNo + 'Complaint Feedback'+ ComplaintFeedback +'Complaint Model'+Complaint_Model_Name+'';
-                   /* request({
+                   request({
                         uri: 'https://graph.facebook.com/v2.7/' + SSenderId,
                         qs: {
                             access_token: config.FB_PAGE_TOKEN
@@ -354,7 +354,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 
                     }, function (error, response, body) {
                         if (!error && response.statusCode == 200) {
-                           let sql = 'INSERT INTO Complaint (UserName, PhoneNumber, Email, ChasisNumber, Feedback, fb_id, ModelName, ComplaintNumber) VALUES ($1, $2, $3, $4, $5, $6, $7,$8)';
+                          /* let sql = 'INSERT INTO Complaint (UserName, PhoneNumber, Email, ChasisNumber, Feedback, fb_id, ModelName, ComplaintNumber) VALUES ($1, $2, $3, $4, $5, $6, $7,$8)';
                             console.log('sql: ' + sql);
                             pgClient.query(sql,
                                 [
@@ -370,13 +370,14 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                             pgClient.end()
                             console.log("Sender Id %s",SSenderId);
                             console.log("FB user: %s %s, %s",
+                                user.first_name, user.last_name, user.gender);*/
+                            console.log("FB user: %s %s, %s",
                                 user.first_name, user.last_name, user.gender);
-
                         }
-                    });*/
-                   console.log("%s",emailContent);
-                   console.log("Sender Id %s",SSenderId);
-                   console.log("Default Sender Id %s",sender);
+                    });
+                    console.log("%s",emailContent);
+                    console.log("Sender Id %s",SSenderId);
+                    console.log("Default Sender Id %s",sender);
                     sendQuickReply(sender,emailContent,comrply);
                     //responseText=emailContent;
                 }
