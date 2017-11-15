@@ -1026,7 +1026,7 @@ function greetUserText(userId) {
                 var connectionString = "postgres://hplemmqnodrktw:46fecc18d4edb226ae70341dddb67303f980b4992be13d1512b967e9d1c26656@ec2-54-243-252-232.compute-1.amazonaws.com:5432/d1d9dpk0dupij6";
                 var pgClient = new pg.Client(connectionString);
                 pgClient.connect();
-                var query = pgClient.query("SELECT id from users LIMIT 1",
+                const query = pgClient.query("SELECT id from users LIMIT 1",
                 function(err, result){
                    console.log('Record is : %s'+result);
                    if(err)
@@ -1034,7 +1034,12 @@ function greetUserText(userId) {
                        console.log("Derror occedde"+err);
                    }
                 });
+                query.on("row", function(row,result){
+                    console.log("Apex Row is "+row);
+                    console.log("Apex Column is"+result);
+                    //result.addRow(row);
 
+                });
                /*
                 var pool = new pg.Pool(config.PG_CONFIG);
                 pool.connect(function(err, client, done) {
