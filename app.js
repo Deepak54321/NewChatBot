@@ -1029,7 +1029,7 @@ function greetUserText(userId) {
                         return console.error('Error acquiring client', err.stack);
                     }
                     var rows = [];
-                    client.query("SELECT id FROM users WHERE fb_id='${userId}' LIMIT 1",
+                    client.query("SELECT id FROM user WHERE fb_id='${userId}' LIMIT 1",
                         function(err, result) {
                             console.log('query result ' + result);
                             if (err) {
