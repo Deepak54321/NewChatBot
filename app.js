@@ -319,6 +319,8 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
             }
             break;
         case "complaintuser-data":
+            pgClient.connect();
+            var rows = [];
             let comrply =  [
                 {
                     "content_type":"text",
@@ -337,13 +339,39 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     contexts[0].parameters['ComplaintFeedback'] != '') ? contexts[0].parameters['ComplaintFeedback'] : '';
                 let Complaint_Model_Name=(isDefined(contexts[0].parameters['ComplaintModelName']) &&
                     contexts[0].parameters['ComplaintModelName'] != '') ? contexts[0].parameters['ComplaintModelName'] : '';
+                let Complaint_Number=(isDefined(contexts[0].parameters['Complaint_Number']) &&
+                    contexts[0].parameters['Complaint_Number'] != '') ? contexts[0].parameters['Complaint_Number'] : '';
 
                 if (phone_number != '' && email != '') {
                     let emailContent =  'Phone Number:=' + phone_number + 'email:=' + email + 'customer' +
                         'Complaint Chasis No' + Complaint_ChasisNo + 'Complaint Feedback'+ ComplaintFeedback +'Complaint Model'+Complaint_Model_Name+'';
+                    request({
+                        uri: 'https://graph.facebook.com/v2.7/' + SSenderId,
+                        qs: {
+                            access_token: config.FB_PAGE_TOKEN
+                        }
+
+                    }, function (error, response, body) {
+                        if (!error && response.statusCode == 200) {
+                            let sql = 'INSERT INTO Complaint (UserName, PhoneNumber, Email, ChasisNumber, Feedback, fb_id, ModelName, ComplaintNumber) VALUES ($1, $2, $3, $4, $5, $6, $7,$8)';
+                            console.log('sql: ' + sql);
+                            pgClient.query(sql,
+                                [
+                                    user.first_name,
+                                    phone_number,
+                                    email,
+                                    Complaint_ChasisNo,
+                                    ComplaintFeedback,
+                                    SSenderId,
+                                    Complaint_Model_Name,
+                                    Complaint_Number
+                                ]);
+                        }
+                    });
                     sendQuickReply(sender,emailContent,comrply);
                     //responseText=emailContent;
                 }
+
                 sendTextMessage(sender, responseText);
             }
             break;
@@ -1067,7 +1095,6 @@ function greetUserText(userId) {
                             }
                         });
 
-
                 //contexts[0].parameters['UserName'] = user.first_name;
                 let message=user.first_name +" I am your Bot your Bot Please Choose One of the following options";
                 let reply =  [
@@ -1092,6 +1119,7 @@ function greetUserText(userId) {
                 sendQuickReply(userId,message,reply);
                 //sendTextMessage(userId, "Welcome " + user.first_name + '!');
                // sendQuickReply()
+
             } else {
                 console.log("Cannot get data for fb user with id",
                     userId);
