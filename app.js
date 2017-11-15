@@ -1022,7 +1022,7 @@ function greetUserText(userId) {
             if (user.first_name) {
                 console.log("FB user: %s %s, %s",
                     user.first_name, user.last_name, user.gender);
-                console.log(userId);
+                console.log("UserId is %s",userId);
             var pool = new pg.Pool(config.PG_CONFIG);
                 pool.connect(function(err, client, done) {
                     if (err) {
