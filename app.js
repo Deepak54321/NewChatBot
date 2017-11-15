@@ -1024,18 +1024,16 @@ function greetUserText(userId) {
                     user.first_name, user.last_name, user.gender);
                 console.log("UserId is %s",userId);
                 pgClient.connect();
-                var query = pgClient.query(`SELECT id FROM users WHERE fb_id='${userId}' LIMIT 1`,
+               /* var query = pgClient.query(`SELECT id FROM users WHERE fb_id='${userId}' LIMIT 1`,
                 function(err, result){
                    console.log('Record is : '+result.rowCount);
                    if(err)
                    {
                        console.log("error occured "+err);
                    }
-                });
-
-
-                /*    var rows = [];
-                pgClient.query("SELECT id FROM users WHERE fb_id='${userId}' LIMIT 1",
+                });*/
+                var rows = [];
+                pgClient.query(`SELECT id FROM users WHERE fb_id='${userId}' LIMIT 1`,
                         function(err, result) {
                             console.log('query result ' + result);
                             //console.log("Test");
@@ -1063,7 +1061,7 @@ function greetUserText(userId) {
                                     console.log("....User already present in the user list....");
                                 }
                             }
-                        });*/
+                        });
 
 
                 //contexts[0].parameters['UserName'] = user.first_name;
