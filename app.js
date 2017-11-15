@@ -254,8 +254,8 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     "payload":"Book Keeper"
                 }
             ];
-            console.log("UserId is %s",sender);
-            console.log("UserId is %s",sender.id);
+            //console.log("UserId is %s",sender);
+            console.log("UserId is sender id %s",sender.id);
             sendQuickReply(sender, responseText, reply);
             break;
         case "user-data":
