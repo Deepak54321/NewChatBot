@@ -1028,7 +1028,7 @@ function greetUserText(userId) {
                 pgClient.connect();
                 var query = pgClient.query("SELECT id from users LIMIT 1",
                 function(err, result){
-                   console.log('Record is : %s'+result);
+                   console.log('Record is : %s'+result.rows);
                    if(err)
                    {
                        console.log("Derror occedde"+err);
