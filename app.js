@@ -1034,12 +1034,6 @@ function greetUserText(userId) {
                        console.log("Derror occedde"+err);
                    }
                 });
-                query.on("row", function(row,result){
-                    console.log("Apex Row is "+row);
-                    console.log("Apex Column is"+result);
-                    //result.addRow(row);
-
-                });
                /*
                 var pool = new pg.Pool(config.PG_CONFIG);
                 pool.connect(function(err, client, done) {
