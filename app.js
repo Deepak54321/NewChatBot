@@ -366,6 +366,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                     Complaint_Model_Name,
                                     Complaint_Number
                                 ]);
+                            pgClient.end();
                         }
                     });
                     sendQuickReply(sender,emailContent,comrply);
@@ -1094,7 +1095,7 @@ function greetUserText(userId) {
                                 }
                             }
                         });
-
+                pgClient.end();
                 //contexts[0].parameters['UserName'] = user.first_name;
                 let message=user.first_name +" I am your Bot your Bot Please Choose One of the following options";
                 let reply =  [
