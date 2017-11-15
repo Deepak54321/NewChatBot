@@ -11,6 +11,7 @@ const pg=require('pg');
 pg.defaults.ssl=true;
 var connectionString = "postgres://hplemmqnodrktw:46fecc18d4edb226ae70341dddb67303f980b4992be13d1512b967e9d1c26656@ec2-54-243-252-232.compute-1.amazonaws.com:5432/d1d9dpk0dupij6";
 var pgClient = new pg.Client(connectionString);
+var SSenderId='';
 // Messenger API parameters
 if (!config.FB_PAGE_TOKEN) {
     throw new Error('missing FB_PAGE_TOKEN');
@@ -133,7 +134,7 @@ function receivedMessage(event) {
     var recipientID = event.recipient.id;
     var timeOfMessage = event.timestamp;
     var message = event.message;
-
+    SSenderId=senderID;
     if (!sessionIds.has(senderID)) {
         sessionIds.set(senderID, uuid.v1());
     }
@@ -254,8 +255,8 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     "payload":"Book Keeper"
                 }
             ];
-            //console.log("UserId is %s",sender);
-            console.log("UserId is sender id %s",sender.id);
+            console.log("UserId is sdlkjfsdf %s",sender);
+            console.log("UID %s",SSenderId);
             sendQuickReply(sender, responseText, reply);
             break;
         case "user-data":
