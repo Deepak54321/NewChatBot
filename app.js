@@ -322,7 +322,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
            // var connectionString = "postgres://hplemmqnodrktw:46fecc18d4edb226ae70341dddb67303f980b4992be13d1512b967e9d1c26656@ec2-54-243-252-232.compute-1.amazonaws.com:5432/d1d9dpk0dupij6";
             //var pgClient = new pg.Client(connectionString);
             //pgClient.connect();
-            var rows = [];
+            //var rows = [];
             let comrply =  [
                 {
                     "content_type":"text",
@@ -355,19 +355,27 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     //responseText=emailContent;
                 }
 
-                request({
-                    uri: 'https://graph.facebook.com/v2.7/' + SSenderId,
-                    qs: {
-                        access_token: config.FB_PAGE_TOKEN
-                    }
-
-                }, function (error, response, body) {
-                    if (!error && response.statusCode == 200) {
-                        console.log("FB user: %s %s, %s",
-                            user.first_name, user.last_name, user.gender);
-                    }
-                });
-
+                pgClient.connect();
+                var rows = [];
+                pgClient.query(`SELECT first_name  FROM users WHERE fb_id='${SSenderId}' LIMIT 1`,
+                    function(err, result) {
+                        console.log('query result ' + result);
+                        //console.log("Test");
+                        if (err) {
+                            console.log('Query error: ' + err);
+                        } else {
+                            console.log('rows: ' + result.rows.length);
+                            console.log('rows: ' + result.rowCount);
+                            if (result.rows.length === 0) {
+                               
+                            }
+                            else
+                            {
+                                console.log("....User already present in the user list....");
+                            }
+                        }
+                    });
+                pgClient.end();
 
                 sendTextMessage(sender, responseText);
             }
