@@ -1087,6 +1087,7 @@ function greetUserText(userId) {
                         "payload":"Complaint"
                     }
                 ];
+                sendImageMessage(userId,'http://www.innovationiseverywhere.com/wp-content/uploads/2016/12/robot-customer-service.png');
                 sendQuickReply(userId,message,reply);
                 //sendTextMessage(userId, "Welcome " + user.first_name + '!');
                // sendQuickReply()
