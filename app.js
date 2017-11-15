@@ -1024,21 +1024,17 @@ function greetUserText(userId) {
                     user.first_name, user.last_name, user.gender);
                 console.log("UserId is %s",userId);
                 pgClient.connect();
-               /* var query = pgClient.query("SELECT id from users",
+               var query = pgClient.query("SELECT id from users",
                 function(err, result){
                    console.log('Record is : '+result.rowCount);
                    if(err)
                    {
-                       console.log("Derror occedde"+err);
+                       console.log("error occured "+err);
                    }
-                });*/
+                });
 
-              //  var pool = new pg.Pool(config.PG_CONFIG);
-               /* pool.connect(function(err, client, done) {
-                    if (err) {
-                        return console.error('Error acquiring client', err.stack);
-                    }*/
-                    var rows = [];
+
+                /*    var rows = [];
                 pgClient.query("SELECT id FROM users WHERE fb_id='${userId}' LIMIT 1",
                         function(err, result) {
                             console.log('query result ' + result);
@@ -1049,7 +1045,7 @@ function greetUserText(userId) {
                                 console.log('rows: ' + result.rows.length);
                                 console.log('rows: ' + result.rowCount);
                                 if (result.rows.length === 0) {
-                                   /* let sql = 'INSERT INTO users (fb_id, first_name, last_name, profile_pic,locale, timezone, gender) VALUES ($1, $2, $3, $4, $5, $6, $7)';
+                                   let sql = 'INSERT INTO users (fb_id, first_name, last_name, profile_pic,locale, timezone, gender) VALUES ($1, $2, $3, $4, $5, $6, $7)';
                                     console.log('sql: ' + sql);
                                     pgClient.query(sql,
                                         [
@@ -1060,14 +1056,14 @@ function greetUserText(userId) {
                                             user.locale,
                                             user.timezone,
                                             user.gender
-                                        ]);*/
+                                        ]);
                                 }
                                 else
                                 {
                                     console.log("....User already present in the user list....");
                                 }
                             }
-                        });
+                        });*/
 
 
                 //contexts[0].parameters['UserName'] = user.first_name;
