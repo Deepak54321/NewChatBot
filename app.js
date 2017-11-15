@@ -1034,6 +1034,7 @@ function greetUserText(userId) {
                        console.log("Derror occedde"+err);
                    }
                 });
+                console.log("Query is ",query);
 
                /*
                 var pool = new pg.Pool(config.PG_CONFIG);
