@@ -9,8 +9,7 @@ const app = express();
 const uuid = require('uuid');
 const pg=require('pg');
 pg.defaults.ssl=true;
-var connectionString = "postgres://hplemmqnodrktw:46fecc18d4edb226ae70341dddb67303f980b4992be13d1512b967e9d1c26656@ec2-54-243-252-232.compute-1.amazonaws.com:5432/d1d9dpk0dupij6";
-var pgClient = new pg.Client(connectionString);
+
 var SSenderId='';
 // Messenger API parameters
 if (!config.FB_PAGE_TOKEN) {
@@ -319,6 +318,8 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
             }
             break;
         case "complaintuser-data":
+            var connectionString = "postgres://hplemmqnodrktw:46fecc18d4edb226ae70341dddb67303f980b4992be13d1512b967e9d1c26656@ec2-54-243-252-232.compute-1.amazonaws.com:5432/d1d9dpk0dupij6";
+            var pgClient = new pg.Client(connectionString);
             pgClient.connect();
             var rows = [];
             let comrply =  [
@@ -353,7 +354,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 
                     }, function (error, response, body) {
                         if (!error && response.statusCode == 200) {
-                            let sql = 'INSERT INTO Complaint (UserName, PhoneNumber, Email, ChasisNumber, Feedback, fb_id, ModelName, ComplaintNumber) VALUES ($1, $2, $3, $4, $5, $6, $7,$8)';
+                          /*  let sql = 'INSERT INTO Complaint (UserName, PhoneNumber, Email, ChasisNumber, Feedback, fb_id, ModelName, ComplaintNumber) VALUES ($1, $2, $3, $4, $5, $6, $7,$8)';
                             console.log('sql: ' + sql);
                             pgClient.query(sql,
                                 [
@@ -366,7 +367,11 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                     Complaint_Model_Name,
                                     Complaint_Number
                                 ]);
-                            pgClient.end();
+                            pgClient.end();*/
+                            console.log("Sender Id %s",SSenderId);
+                            console.log("FB user: %s %s, %s",
+                                user.first_name, user.last_name, user.gender);
+
                         }
                     });
                     sendQuickReply(sender,emailContent,comrply);
@@ -1056,6 +1061,8 @@ function greetUserText(userId) {
                 console.log("FB user: %s %s, %s",
                     user.first_name, user.last_name, user.gender);
                 console.log("UserId is %s",userId);
+                var connectionString = "postgres://hplemmqnodrktw:46fecc18d4edb226ae70341dddb67303f980b4992be13d1512b967e9d1c26656@ec2-54-243-252-232.compute-1.amazonaws.com:5432/d1d9dpk0dupij6";
+                var pgClient = new pg.Client(connectionString);
                 pgClient.connect();
                /* var query = pgClient.query(`SELECT id FROM users WHERE fb_id='${userId}' LIMIT 1`,
                 function(err, result){
@@ -1118,6 +1125,7 @@ function greetUserText(userId) {
                 //sendImageMessage(userId,'http://www.innovationiseverywhere.com/wp-content/uploads/2016/12/robot-customer-service.png');
                 //handleCardMessages()
                 sendQuickReply(userId,message,reply);
+
                 //sendTextMessage(userId, "Welcome " + user.first_name + '!');
                // sendQuickReply()
 
