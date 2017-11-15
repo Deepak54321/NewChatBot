@@ -1042,11 +1042,12 @@ function greetUserText(userId) {
                 pgClient.query("SELECT id FROM users WHERE fb_id='${userId}' LIMIT 1",
                         function(err, result) {
                             console.log('query result ' + result);
-                            console.log("Test");
+                            //console.log("Test");
                             if (err) {
                                 console.log('Query error: ' + err);
                             } else {
                                 console.log('rows: ' + result.rows.length);
+                                console.log('rows: ' + result.rowCount);
                                 if (result.rows.length === 0) {
                                    /* let sql = 'INSERT INTO users (fb_id, first_name, last_name, profile_pic,locale, timezone, gender) VALUES ($1, $2, $3, $4, $5, $6, $7)';
                                     console.log('sql: ' + sql);
