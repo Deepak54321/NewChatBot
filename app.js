@@ -1024,23 +1024,22 @@ function greetUserText(userId) {
                     user.first_name, user.last_name, user.gender);
                 console.log("UserId is %s",userId);
                 pgClient.connect();
-                var query = pgClient.query("SELECT id from users",
+               /* var query = pgClient.query("SELECT id from users",
                 function(err, result){
                    console.log('Record is : '+result.rowCount);
                    if(err)
                    {
                        console.log("Derror occedde"+err);
                    }
-                });
-               /*
-                var pool = new pg.Pool(config.PG_CONFIG);
-                pool.connect(function(err, client, done) {
+                });*/
+
+              //  var pool = new pg.Pool(config.PG_CONFIG);
+               /* pool.connect(function(err, client, done) {
                     if (err) {
                         return console.error('Error acquiring client', err.stack);
-                    }
+                    }*/
                     var rows = [];
-                    client.
-                    client.query("SELECT * FROM users",
+                pgClient.query("SELECT id FROM users WHERE fb_id='${userId}' LIMIT 1",
                         function(err, result) {
                             console.log('query result ' + result);
                             console.log("Test");
@@ -1059,7 +1058,7 @@ function greetUserText(userId) {
                                 if (result.rows.length === 0) {
                                     let sql = 'INSERT INTO users (fb_id, first_name, last_name, profile_pic,locale, timezone, gender) VALUES ($1, $2, $3, $4, $5, $6, $7)';
                                     console.log('sql: ' + sql);
-                                    client.query(sql,
+                                    pgClient.query(sql,
                                         [
                                             userId,
                                             user.first_name,
@@ -1072,10 +1071,8 @@ function greetUserText(userId) {
                                 }
                             }
                         });
-                     done();
-                });
-                pool.end();
-                */
+
+
                 //contexts[0].parameters['UserName'] = user.first_name;
                 let message=user.first_name +" I am your Bot your Bot Please Choose One of the following options";
                 let reply =  [
