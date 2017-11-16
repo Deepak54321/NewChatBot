@@ -393,7 +393,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 console.log("Complaint Model Name %s",Complaint_Model_Name);
                                 console.log("Complaint Number %s",Complaint_Number);
 
-                                let sql = 'INSERT INTO Complaint (UserName, PhoneNumber, Email, ChasisNumber, Feedback, fb_id, ModelName, ComplaintNumber) VALUES ($1, $2, $3, $4, $5, $6, $7,$8)';
+                                let sql = 'INSERT INTO complaints (UserName, PhoneNumber, Email, ChasisNumber, Feedback, fb_id, ModelName, ComplaintNumber) VALUES ($1, $2, $3, $4, $5, $6, $7,$8)';
                                 console.log('sql: ' + sql);
                                 pgClient.query(sql,
                                     [
