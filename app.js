@@ -353,7 +353,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     sendQuickReply(sender,emailContent,comrply);
                     //responseText=emailContent;
                 }
-              /*  var connectionString = "postgres://hplemmqnodrktw:46fecc18d4edb226ae70341dddb67303f980b4992be13d1512b967e9d1c26656@ec2-54-243-252-232.compute-1.amazonaws.com:5432/d1d9dpk0dupij6";
+                var connectionString = "postgres://hplemmqnodrktw:46fecc18d4edb226ae70341dddb67303f980b4992be13d1512b967e9d1c26656@ec2-54-243-252-232.compute-1.amazonaws.com:5432/d1d9dpk0dupij6";
                 var pgClient = new pg.Client(connectionString);
                 pgClient.connect();
                 var rows = [];
@@ -375,7 +375,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                             }
                         }
                     });
-                pgClient.end();*/
+                //pgClient.end();
 
                 sendTextMessage(sender, responseText);
             }
