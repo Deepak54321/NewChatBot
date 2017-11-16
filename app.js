@@ -401,10 +401,10 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                             console.log("error occured "+err);
                                         }
                                     });*/
-                                let sql = 'INSERT INTO complaints (id,UserName, PhoneNumber, Email, ChasisNumber, Feedback, fb_id, ModelName, ComplaintNumber) VALUES ($1, $2, $3, $4, $5, $6, $7, $8 ,$9)';
+                                let sql = 'INSERT INTO complaints (user_name, phone_number, email, chasis_number, feedback, fb_id, model_name, complaint_number) VALUES ($1, $2, $3, $4, $5, $6, $7, $8 )';
                                 console.log('sql: ' + sql);
                                 pgClient.query(sql,
-                                    [            did,
+                                    [
                                         GUser_Name,
                                         phone_number,
                                         email,
