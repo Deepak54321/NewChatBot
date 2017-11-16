@@ -342,6 +342,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     contexts[0].parameters['ComplaintModelName'] != '') ? contexts[0].parameters['ComplaintModelName'] : '';
                 let Complaint_Number=(isDefined(contexts[0].parameters['Complaint_Number']) &&
                     contexts[0].parameters['Complaint_Number'] != '') ? contexts[0].parameters['Complaint_Number'] : '';
+                    Complaint_Number=82937894;
 
                 if (phone_number != '' && email != '') {
                     let emailContent =  'Phone Number:=' + phone_number + 'email:=' + email + 'customer' +
