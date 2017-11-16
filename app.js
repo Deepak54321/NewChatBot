@@ -357,21 +357,32 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                 var pgClient = new pg.Client(connectionString);
                 pgClient.connect();
                 var rows = [];
+                var f_name=[];
                 pgClient.query(`SELECT first_name  FROM users WHERE fb_id='${sender}' LIMIT 1`,
                     function(err, result) {
                         console.log('query result ' + result);
                         //console.log("Test");
+
                         if (err) {
                             console.log('Query error: ' + err);
                         } else {
+                            for(var i=0;i<result.rows.length;i++)
+                            {
+                                f_name.push(result.rows[i]['first_name']);
+
+                            }
                             console.log('rows: ' + result.rows.length);
                             console.log('rows: ' + result.rowCount);
                             if (result.rows.length === 0) {
-
+                                console.log("....User Not Found in the user list....");
                             }
                             else
                             {
-                                console.log("....User already present in the user list....");
+                                for(var i=0;i<f_name.length;i++)
+                                {
+                                    GUser_Name=f_name[i];
+                                    console.log("Global username %s",f_name);
+                                }
                             }
                         }
                     });
