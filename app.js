@@ -340,9 +340,12 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     contexts[0].parameters['ComplaintFeedback'] != '') ? contexts[0].parameters['ComplaintFeedback'] : '';
                 let Complaint_Model_Name=(isDefined(contexts[0].parameters['ComplaintModelName']) &&
                     contexts[0].parameters['ComplaintModelName'] != '') ? contexts[0].parameters['ComplaintModelName'] : '';
-                let Complaint_Number=(isDefined(contexts[0].parameters['Complaint_Number']) &&
-                    contexts[0].parameters['Complaint_Number'] != '') ? contexts[0].parameters['Complaint_Number'] : '';
-                    Complaint_Number=82937894;
+                let Complaint_Number=(isDefined(contexts[0].parameters['ComplaintNumber']) &&
+                    contexts[0].parameters['ComplaintNumber'] != '') ? contexts[0].parameters['ComplaintNumber'] : '';
+                   // Complaint_Number=82937894;
+
+                let Complaint_Desc=(isDefined(contexts[0].parameters['ComplaintDescription']) &&
+                    contexts[0].parameters['ComplaintDescription'] != '') ? contexts[0].parameters['ComplaintDescription'] : '';
 
                 if (phone_number != '' && email != '') {
                     let emailContent =  'Phone Number:=' + phone_number + 'email:=' + email + 'customer' +
@@ -401,7 +404,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                             console.log("error occured "+err);
                                         }
                                     });*/
-                                let sql = 'INSERT INTO complaints (user_name, phone_number, email, chasis_number, feedback, fb_id, model_name, complaint_number) VALUES ($1, $2, $3, $4, $5, $6, $7, $8 )';
+                                let sql = 'INSERT INTO complaints (user_name, phone_number, email, chasis_number, feedback, fb_id, model_name, complaint_number,complaint_desc) VALUES ($1, $2, $3, $4, $5, $6, $7, $8,$9)';
                                 console.log('sql: ' + sql);
                                 pgClient.query(sql,
                                     [
@@ -412,7 +415,8 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                         ComplaintFeedback,
                                         SSenderId,
                                         Complaint_Model_Name,
-                                        Complaint_Number
+                                        Complaint_Number,
+                                        Complaint_Desc
                                     ]);
                             }
                         }
