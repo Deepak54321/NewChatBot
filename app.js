@@ -383,6 +383,19 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                     GUser_Name=f_name[i];
                                     console.log("Global username %s",f_name);
                                 }
+                                let sql = 'INSERT INTO Complaint (UserName, PhoneNumber, Email, ChasisNumber, Feedback, fb_id, ModelName, ComplaintNumber) VALUES ($1, $2, $3, $4, $5, $6, $7,$8)';
+                                console.log('sql: ' + sql);
+                                pgClient.query(sql,
+                                    [
+                                        GUser_Name,
+                                        phone_number,
+                                        email,
+                                        Complaint_ChasisNo,
+                                        ComplaintFeedback,
+                                        SSenderId,
+                                        Complaint_Model_Name,
+                                        Complaint_Number
+                                    ]);
                             }
                         }
                     });
