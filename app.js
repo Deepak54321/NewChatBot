@@ -359,6 +359,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                 pgClient.connect();
                 var rows = [];
                 var f_name=[];
+                var did=4;
                 pgClient.query(`SELECT first_name  FROM users WHERE fb_id='${sender}' LIMIT 1`,
                     function(err, result) {
                         console.log('query result ' + result);
@@ -400,10 +401,10 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                             console.log("error occured "+err);
                                         }
                                     });*/
-                                let sql = 'INSERT INTO complaints (UserName, PhoneNumber, Email, ChasisNumber, Feedback, fb_id, ModelName, ComplaintNumber) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';
+                                let sql = 'INSERT INTO complaints (id,UserName, PhoneNumber, Email, ChasisNumber, Feedback, fb_id, ModelName, ComplaintNumber) VALUES ($1, $2, $3, $4, $5, $6, $7, $8 ,$9)';
                                 console.log('sql: ' + sql);
                                 pgClient.query(sql,
-                                    [
+                                    [            did,
                                         GUser_Name,
                                         phone_number,
                                         email,
@@ -413,7 +414,6 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                         Complaint_Model_Name,
                                         Complaint_Number
                                     ]);
-
                             }
                         }
                     });
