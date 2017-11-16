@@ -369,60 +369,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     sendQuickReply(sender,emailContent,testrply);
                     //responseText=emailContent;
                 }
-                var connectionString = "postgres://hplemmqnodrktw:46fecc18d4edb226ae70341dddb67303f980b4992be13d1512b967e9d1c26656@ec2-54-243-252-232.compute-1.amazonaws.com:5432/d1d9dpk0dupij6";
-                var pgClient = new pg.Client(connectionString);
-                pgClient.connect();
-                var rows = [];
-                var f_name=[];
-                var did=4;
-                pgClient.query(`SELECT first_name  FROM users WHERE fb_id='${sender}' LIMIT 1`,
-                    function(err, result) {
-                        console.log('query result ' + result);
-                        //console.log("Test");
 
-                        if (err) {
-                            console.log('Query error: ' + err);
-                        } else {
-                            for(var i=0;i<result.rows.length;i++)
-                            {
-                                f_name.push(result.rows[i]['first_name']);
-
-                            }
-                            console.log('rows: ' + result.rows.length);
-                            console.log('rows: ' + result.rowCount);
-                            if (result.rows.length === 0) {
-                                console.log("....User Not Found in the user list....");
-                            }
-                            else
-                            {
-                                for(var i=0;i<f_name.length;i++)
-                                {
-                                    GUser_Name=f_name[i];
-                                    console.log("Global username %s",f_name);
-                                }
-                                console.log("UserName %s",GUser_Name);
-                                console.log("PhoneNumber %s",phone_number);
-                                console.log("Email %s",email);
-                                console.log("Customer interest %s",testdrive_customer_interest);
-                                console.log("Feedback %s",testride_Feedback);
-                                console.log("Product Sender Id %s",SSenderId);
-                                console.log("pincode %s",pincode);
-
-                                let sql = 'INSERT INTO testdrive (user_name, phone_number, email,customer_interest,feedback,pincode,fb_id) VALUES ($1, $2, $3, $4, $5, $6, $7)';
-                                console.log('sql: ' + sql);
-                                pgClient.query(sql,
-                                    [
-                                        GUser_Name,
-                                        phone_number,
-                                        email,
-                                        testdrive_customer_interest,
-                                        testride_Feedback,
-                                        pincode,
-                                        SSenderId
-                                    ]);
-                            }
-                        }
-                    });
                 sendTextMessage(sender, responseText);
             }
             break;
