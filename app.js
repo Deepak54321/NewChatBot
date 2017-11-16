@@ -383,14 +383,14 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                     GUser_Name=f_name[i];
                                     console.log("Global username %s",f_name);
                                 }
-                                console.log("%s",GUser_Name);
-                                console.log("%s",phone_number);
-                                console.log("%s",email);
-                                console.log("%s",Complaint_ChasisNo);
-                                console.log("%s",ComplaintFeedback);
-                                console.log("%s",SSenderId);
-                                console.log("%s",Complaint_Model_Name);
-                                console.log("%s",Complaint_Number);
+                                console.log("UserName %s",GUser_Name);
+                                console.log("PhoneNumber %s",phone_number);
+                                console.log("Email %s",email);
+                                console.log("Complaint Chasis No %s",Complaint_ChasisNo);
+                                console.log("Complaint Feedback %s",ComplaintFeedback);
+                                console.log("Complaint Sender Id %s",SSenderId);
+                                console.log("Complaint Model Name %s",Complaint_Model_Name);
+                                console.log("Complaint Number %s",Complaint_Number);
 
                                 let sql = 'INSERT INTO Complaint (UserName, PhoneNumber, Email, ChasisNumber, Feedback, fb_id, ModelName, ComplaintNumber) VALUES ($1, $2, $3, $4, $5, $6, $7,$8)';
                                 console.log('sql: ' + sql);
