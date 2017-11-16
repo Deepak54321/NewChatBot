@@ -613,7 +613,9 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                             }
                         }
                     }
-
+                    console.log("State %s",State);
+                    console.log("City %s",City);
+                    console.log("Country %s",Country);
                     //console.log(city);
                     let view = State + City + Country + 'Hi now you can get your dealers' + lat + lng;
                     //2
@@ -640,6 +642,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                     "payload": "Restart"
                                 }
                             ];
+                            console.log("State Id %s",StateId);
                             if(StateId=='') {
                                 sendQuickReply(sender,"No dealers Found in your area Please restart your conversation", reply2);
                             }
@@ -659,6 +662,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                             CityId = citites[i].city_profile_id;
                                         }
                                     }
+                                    console.log("City Id %s",CityId);
                                     let reply3 = [
                                         {
                                             "content_type": "text",
@@ -692,6 +696,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                                     "payload": "Feedback"
                                                 }
                                             ];
+                                            console.log("Dealer information %s",text1);
                                             if(text1!='') {
                                                 sendQuickReply(sender, text1, rply);
                                             }
