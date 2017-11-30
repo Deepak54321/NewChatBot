@@ -586,7 +586,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
             var request = require('request');
             //1
             request({
-                url:'https://maps.googleapis.com/maps/api/geocode/json?address='+dealerpin+'&key=AIzaSyD_YqB4d_-xKcmNP9jJCiPkJYDS8J3f6pI'
+                url:'https://maps.googleapis.com/maps/api/geocode/json?address='+dealer_pin+'&key=AIzaSyD_YqB4d_-xKcmNP9jJCiPkJYDS8J3f6pI'
             },function (error,response,body) {
                 if (!error && response.statusCode == 200) {
                     var result = JSON.parse(body);
@@ -634,13 +634,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 }
 
                             }
-                            var reply2 = [
-                                {
-                                    "content_type": "text",
-                                    "title": "Restart",
-                                    "payload": "Restart"
-                                }
-                            ];
+                            
                             console.log("State Id %s",StateId);
                             if(StateId!='') {
                                 //call();
@@ -663,13 +657,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                         }
                                     }
                                     console.log("City Id %s",CityId);
-                                    var reply3 = [
-                                        {
-                                            "content_type": "text",
-                                            "title": "Restart",
-                                            "payload": "Restart"
-                                        }
-                                    ];
+                                   
                                     if(CityId!='') {
                                         //sendQuickReply(sender,"No dealers Found in your area Please restart your conversation", reply3);
                                     
@@ -695,12 +683,26 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                             if(message!='') {
 												  var text2=true;
 											
-											callback();
+											let qreply = [
+                                                {
+                                                    "content_type": "text",
+                                                    "title": "Feedback",
+                                                    "payload": "Feedback"
+                                                }
+                                            ];
+						               sendQuickReply(sender,message,qreply);
 											//console.log("Dealer information inside %s",check);
 											}
 											else
 											{
-												call();
+												let reply1 = [
+                                                {
+                                                    "content_type": "text",
+                                                    "title": "Feedback",
+                                                    "payload": "Feedback"
+                                                }
+                                            ];
+						sendQuickReply(sender,"No dealers Found in your area", reply1);
 												
 											//console.log("Dealer information inside1 %s",check);
 											}
@@ -718,7 +720,14 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 								}
 								else
 								{
-									call();
+									let reply2 = [
+                                                {
+                                                    "content_type": "text",
+                                                    "title": "Feedback",
+                                                    "payload": "Feedback"
+                                                }
+                                            ];
+						sendQuickReply(sender,"No dealers Found in your area", reply2);
 								}
                                    
 
@@ -731,7 +740,14 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 						}
 						else
 						{
-							call();
+							let reply3 = [
+                                                {
+                                                    "content_type": "text",
+                                                    "title": "Feedback",
+                                                    "payload": "Feedback"
+                                                }
+                                            ];
+						sendQuickReply(sender,"No dealers Found in your area", reply3);
 						}
 							
                         }
@@ -740,27 +756,8 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                         }
                     });
 					
-					function callback(){
-						let rply = [
-                                                {
-                                                    "content_type": "text",
-                                                    "title": "Feedback",
-                                                    "payload": "Feedback"
-                                                }
-                                            ];
-						sendQuickReply(sender, message, rply);
-					}
-					function call()
-					{
-						let reply = [
-                                                {
-                                                    "content_type": "text",
-                                                    "title": "Feedback",
-                                                    "payload": "Feedback"
-                                                }
-                                            ];
-						sendQuickReply(sender,"No dealers Found in your area", reply);
-					}
+					
+					
                 }
                 else {
                     console(log.error());
