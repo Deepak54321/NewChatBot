@@ -676,7 +676,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                             var dealer_Mob = dealers[0].sales_manager_mobile;
                                             var text1 = dealer_name + dealer_add + dealer_Mob;
 											message=text1;
-											test= message;
+											//test= message;
                                             //text1="Helloa";
                                             console.log("Dealer information %s",message);
 											console.log("batman begins");
