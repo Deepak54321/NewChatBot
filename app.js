@@ -569,7 +569,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                 contexts[0].parameters['pincode']!='')? contexts[0].parameters['pincode']:'';
             //var pincode=110005;
 
-            var StateId='';
+           var StateId='';
             var CityId='';
             var City='';
             var State='';
@@ -583,15 +583,14 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
             var dealerId='';
             var address_components='';
             var message='';
-
             var request = require('request');
             //1
             request({
-                url:'https://maps.googleapis.com/maps/api/geocode/json?address='+dealer_pin+'&key=AIzaSyD_YqB4d_-xKcmNP9jJCiPkJYDS8J3f6pI'
+                url:'https://maps.googleapis.com/maps/api/geocode/json?address='+dealerpin+'&key=AIzaSyD_YqB4d_-xKcmNP9jJCiPkJYDS8J3f6pI'
             },function (error,response,body) {
                 if (!error && response.statusCode == 200) {
-                    let result = JSON.parse(body);
-                    let Results = result.results;
+                    var result = JSON.parse(body);
+                    var Results = result.results;
                     for (var i = 0; i < Results.length; i++)
                     {
                         address = Results[i].formatted_address;
@@ -616,8 +615,8 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     console.log("State %s",State);
                     console.log("City %s",City);
                     console.log("Country %s",Country);
-                    //console.log(city);
-                    let view = State + City + Country + 'Hi now you can get your dealers' + lat + lng;
+                   
+                    var view = State + City + Country + 'Hi now you can get your dealers' + lat + lng;
                     //2
                     request({
                         url: 'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/state'
@@ -635,7 +634,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 }
 
                             }
-                            let reply2 = [
+                            var reply2 = [
                                 {
                                     "content_type": "text",
                                     "title": "Restart",
@@ -643,9 +642,10 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 }
                             ];
                             console.log("State Id %s",StateId);
-                            if(StateId=='') {
-                                sendQuickReply(sender,"No dealers Found in your area Please restart your conversation", reply2);
-                            }
+                            if(StateId!='') {
+                                //call();
+								//sendQuickReply(sender,"No dealers Found in your area Please restart your conversation", reply2);
+                            
 
                             //sendTextMessage(sender,StateId);
                             //3
@@ -663,23 +663,21 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                         }
                                     }
                                     console.log("City Id %s",CityId);
-                                    let reply3 = [
+                                    var reply3 = [
                                         {
                                             "content_type": "text",
                                             "title": "Restart",
                                             "payload": "Restart"
                                         }
                                     ];
-                                    if(CityId=='') {
-                                        sendQuickReply(sender,"No dealers Found in your area Please restart your conversation", reply3);
-                                    }
+                                    if(CityId!='') {
+                                        //sendQuickReply(sender,"No dealers Found in your area Please restart your conversation", reply3);
+                                    
 
-                                    //var message=StateId+CityId;
-                                    //sendTextMessage(sender,message);
-
+                                  
                                     request({
-                                        url: 'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/search?type=sales&profile_id=' + StateId + '&city_profile_id=' + CityId
-                                    }, function (error, response, body) {
+                                        url: 'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/search?type=sales&profile_id=' + StateId + '&city_profile_id=' + CityId	
+									}, function (error, response, body) {
                                         if (!error && response.statusCode == 200) {
                                             var result = JSON.parse(body);
                                             var resData = result.responseData;
@@ -689,58 +687,88 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                             var dealer_add = dealers[0].dealer_address;
                                             var dealer_Mob = dealers[0].sales_manager_mobile;
                                             var text1 = dealer_name + dealer_add + dealer_Mob;
-                                            let rply = [
-                                                {
-                                                    "content_type": "text",
-                                                    "title": "Feedback",
-                                                    "payload": "Feedback"
-                                                }
-                                            ];
-                                            console.log("Dealer information %s",text1);
-                                            if(text1!='') {
-                                                sendQuickReply(sender, text1, rply);
-                                            }
-                                            else
-                                            {
-                                                sendQuickReply(sender,"No dealers Found in your area", rply);
-                                            }
+											message=text1;
+											test= message;
+                                            //text1="Helloa";
+                                            console.log("Dealer information %s",message);
+											console.log("batman begins");
+                                            if(message!='') {
+												  var text2=true;
+											
+											callback();
+											//console.log("Dealer information inside %s",check);
+											}
+											else
+											{
+												call();
+												
+											//console.log("Dealer information inside1 %s",check);
+											}
+                                     
+                                    //}
+                                           
                                             //sendTextMessage(sender,text1);
                                         }
                                         else {
                                             console(log.error());
                                         }
+										
                                     });
-                                    /* if(StateId==''|| CityId=='' || dealerId=='')
-                                     {
-                                         let reply = [
-                                             {
-                                                 "content_type": "text",
-                                                 "title": "Feedback",
-                                                 "payload": "Feedback"
-                                             }
-                                         ];
-                                         sendQuickReply(sender,"No Dealers found in you area ....", rply);
-                                     }*/
+									//dealer api call ends here
+								}
+								else
+								{
+									call();
+								}
+                                   
 
                                 }
                                 else {
                                     console(log.error());
                                 }
                             });
+							//city api end here
+						}
+						else
+						{
+							call();
+						}
+							
                         }
                         else {
                             console(log.error());
                         }
                     });
-
+					
+					function callback(){
+						let rply = [
+                                                {
+                                                    "content_type": "text",
+                                                    "title": "Feedback",
+                                                    "payload": "Feedback"
+                                                }
+                                            ];
+						sendQuickReply(sender, message, rply);
+					}
+					function call()
+					{
+						let reply = [
+                                                {
+                                                    "content_type": "text",
+                                                    "title": "Feedback",
+                                                    "payload": "Feedback"
+                                                }
+                                            ];
+						sendQuickReply(sender,"No dealers Found in your area", reply);
+					}
                 }
                 else {
                     console(log.error());
 
                 }
+//now insert here
 
             });
-
 
             break;
         case "user":
