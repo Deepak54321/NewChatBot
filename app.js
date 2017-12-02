@@ -8,7 +8,50 @@ const request = require('request');
 const app = express();
 const uuid = require('uuid');
 const pg=require('pg');
+const colors=require('./colors');
+const passport=require('passport');
+const FacebookStrategy=require('passport-facebook').Strategy;
+const session=require('express-session');
+
 pg.defaults.ssl=true;
+//used to establish a session facebook authenticated user
+app.use(session({
+secret:'keyboard cat',
+resave:true,
+saveUninitilized:true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(function(profile, cb) {
+  cb(null, profile);
+});
+
+app.set('view engine', 'ejs');
+
+app.get('/auth/facebook',passport.authenticate('facebook',{scope:'public_profile'}));
+
+app.get('/auth/facebook/callback',
+    passport.authenticate('facebook',{sucessRedirect:'/broadcast',failureRedirect:'/'}));
+
+passport.deserializeUser(function(profile,cb) {
+  cb(null, profile);
+});
+
+
+//facebook authentication to give broadcast messages
+passport.use(new FacebookStrategy({
+    clientID: config.FB_APP_ID,
+    clientSecret: config.FB_APP_SECRET,
+    callbackURL: config.SERVER_URL + "http://localhost:3000/auth/facebook/callback"
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    process.nextTick(function()
+    {
+        return cb(null,profile);
+    });
+  }
+))
 
 var SSenderId='';
 var GUser_Name='';
@@ -63,8 +106,46 @@ const sessionIds = new Map();
 
 // Index route
 app.get('/', function (req, res) {
-    res.send('Hello world, I am a chat bot')
+    //res.send('Hello world, I am a chat bot')
+    res.render('login');
 })
+
+app.get('/no-access', function (req, res) {
+    //res.send('Hello world, I am a chat bot')
+    res.render('no-access');
+})
+
+app.get('/broadcast', ensureAuthenticated, function (req, res) {
+    res.render('broadcast');
+});
+
+app.post('/broadcast', ensureAuthenticated, function (req, res) {
+    res.render('broadcast-confirm');
+});
+
+app.get('/broadcast-send', ensureAuthenticated, function (req, res) {
+    res.redirect('broadcast-sent');
+});
+
+app.get('/broadcast-sent', ensureAuthenticated, function (req, res) {
+    res.render('broadcast-sent');
+});
+
+app.get('/logout', ensureAuthenticated, function (req, res) {
+    req.logout();
+    res.redirect('/');
+});
+
+function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+       
+            return next();
+        
+       
+    } else {
+        res.redirect('/');
+    }
+}
 
 // for Facebook verification
 app.get('/webhook/', function (req, res) {
