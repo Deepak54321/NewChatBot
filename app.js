@@ -133,6 +133,15 @@ app.post('/broadcast', ensureAuthenticated, function (req, res) {
 });
 
 app.get('/broadcast-send', ensureAuthenticated, function (req, res) {
+   let message = req.session.message;
+    let allUsers = req.session.users;
+
+    let sender;
+    for (let i=0; i < allUsers.length; i++ ) {
+        sender = allUsers[i].fb_id;
+        sendTextMessage(sender, message);
+    }
+
     res.redirect('broadcast-sent');
 });
 
