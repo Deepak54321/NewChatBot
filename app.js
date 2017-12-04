@@ -366,10 +366,12 @@ function handleQuickReply(senderID, quickReply, messageId) {
                 }
             }, 2, senderID);
             break;
+            default:
+            sendToApiAi(senderID, quickReplyPayload);
         }
-   // console.log("Quick reply for message %s with payload %s", messageId, quickReplyPayload);
+   console.log("Quick reply for message %s with payload %s", messageId, quickReplyPayload);
     //send payload to api.ai
-    sendToApiAi(senderID, quickReplyPayload);
+    //sendToApiAi(senderID, quickReplyPayload);
 }
 
 //https://developers.facebook.com/docs/messenger-platform/webhook-reference/message-echo
