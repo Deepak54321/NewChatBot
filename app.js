@@ -15,43 +15,7 @@ const session=require('express-session');
 
 pg.defaults.ssl=true;
 //used to establish a session facebook authenticated user
-app.use(session({
-secret:'keyboard cat',
-resave:true,
-saveUninitilized:true
-}));
-app.use(passport.initialize());
-app.use(passport.session());
 
-passport.serializeUser(function(profile, cb) {
-  cb(null, profile);
-});
-
-app.set('view engine', 'ejs');
-
-app.get('/auth/facebook',passport.authenticate('facebook',{scope:'public_profile'}));
-
-app.get('/auth/facebook/callback',
-    passport.authenticate('facebook',{sucessRedirect:'/broadcast',failureRedirect:'/'}));
-
-passport.deserializeUser(function(profile,cb) {
-  cb(null, profile);
-});
-
-
-//facebook authentication to give broadcast messages
-passport.use(new FacebookStrategy({
-    clientID: config.FB_APP_ID,
-    clientSecret: config.FB_APP_SECRET,
-    callbackURL: config.SERVER_URL + "http://localhost:3000/auth/facebook/callback"
-  },
-  function(accessToken, refreshToken, profile, cb) {
-    process.nextTick(function()
-    {
-        return cb(null,profile);
-    });
-  }
-))
 
 var SSenderId='';
 var GUser_Name='';
@@ -96,7 +60,43 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json())
 
 
+app.use(session({
+secret:'keyboard cat',
+resave:true,
+saveUninitilized:true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
+passport.serializeUser(function(profile, cb) {
+  cb(null, profile);
+});
+
+app.set('view engine', 'ejs');
+
+app.get('/auth/facebook',passport.authenticate('facebook',{scope:'public_profile'}));
+
+app.get('/auth/facebook/callback',
+    passport.authenticate('facebook',{sucessRedirect:'/broadcast',failureRedirect:'/'}));
+
+passport.deserializeUser(function(profile,cb) {
+  cb(null, profile);
+});
+
+
+//facebook authentication to give broadcast messages
+passport.use(new FacebookStrategy({
+    clientID: config.FB_APP_ID,
+    clientSecret: config.FB_APP_SECRET,
+    callbackURL: config.SERVER_URL + "http://localhost:3000/auth/facebook/callback"
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    process.nextTick(function()
+    {
+        return cb(null,profile);
+    });
+  }
+))
 
 const apiAiService = apiai(config.API_AI_CLIENT_ACCESS_TOKEN, {
     language: "en",
