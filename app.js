@@ -325,7 +325,6 @@ function receivedMessage(event) {
 
  function newsletterSettings(callback, setting, userId) {
 
-
 var connectionString = "postgres://hplemmqnodrktw:46fecc18d4edb226ae70341dddb67303f980b4992be13d1512b967e9d1c26656@ec2-54-243-252-232.compute-1.amazonaws.com:5432/d1d9dpk0dupij6";
                 var pgClient = new pg.Client(connectionString);
                 pgClient.connect();
@@ -334,9 +333,9 @@ var connectionString = "postgres://hplemmqnodrktw:46fecc18d4edb226ae70341dddb673
                     function(err, result) {
                         if (err) {
                             console.log(err);
-                            callback(false);
+                            //callback(false);
                         } else {
-                            callback(true);
+                            //callback(true);
                         };
                     });
     }
