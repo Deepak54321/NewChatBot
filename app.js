@@ -11,8 +11,7 @@ const pg=require('pg');
 //const colors=require('./colors');
 const passport=require('passport');
 const FacebookStrategy=require('passport-facebook').Strategy;
-const session=require('express-session');
-
+const session = require('express-session');
 pg.defaults.ssl=true;
 //used to establish a session facebook authenticated user
 
