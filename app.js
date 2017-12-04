@@ -327,6 +327,7 @@ function receivedMessage(event) {
 console.log("news letter called successfully............***********");
 var connectionString = "postgres://hplemmqnodrktw:46fecc18d4edb226ae70341dddb67303f980b4992be13d1512b967e9d1c26656@ec2-54-243-252-232.compute-1.amazonaws.com:5432/d1d9dpk0dupij6";
                 var pgClient = new pg.Client(connectionString);
+
                 pgClient.connect();
                     pgClient.query('UPDATE users SET newsletter=$1 WHERE fb_id=$2',
                     [setting, userId],
@@ -347,8 +348,21 @@ function handleQuickReply(senderID, quickReply, messageId) {
         case 'NEWS_PER_WEEK':
             newsletterSettings(function(updated) {
                 if (updated) {
-                    sendTextMessage(senderID, "Thank you for subscribing!" +
-                        "If you want to usubscribe just write 'unsubscribe from newsletter'");
+                    let rply =  [
+                    {
+
+                        "content_type":"text",
+                        "title":"unsubscribe",
+                        "payload":"unsubscribe"
+                    },
+                    {
+                        "content_type":"text",
+                        "title":"Restart",
+                        "payload":"Restart"
+                    }
+                ];
+                    sendQuickReply(senderID, "Thank you for subscribing!" +
+                        "If you want to usubscribe just press 'unsubscribe from newsletter or click Restart to start your conversation'",rply);
                 } else {
                     sendTextMessage(senderID, "Newsletter is not available at this moment." +
                         "Try again later!");
@@ -358,8 +372,20 @@ function handleQuickReply(senderID, quickReply, messageId) {
         case 'NEWS_PER_DAY':
             newsletterSettings(function(updated) {
                 if (updated) {
-                    sendTextMessage(senderID, "Thank you for subscribing!" +
-                        "If you want to usubscribe just write 'unsubscribe from newsletter'");
+                     let reply =  [
+                      {
+
+                        "content_type":"text",
+                        "title":"unsubscribe",
+                        "payload":"unsubscribe"
+                    },
+                    {
+                        "content_type":"text",
+                        "title":"Restart",
+                        "payload":"Restart"
+                    }];
+                    sendQuickReply(senderID, "Thank you for subscribing!" +
+                        "If you want to usubscribe just press 'unsubscribe from newsletter' or press Restart to start the conversation",reply);
                 } else {
                     sendTextMessage(senderID, "Newsletter is not available at this moment." +
                         "Try again later!");
