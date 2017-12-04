@@ -122,7 +122,14 @@ app.get('/broadcast', ensureAuthenticated, function (req, res) {
 });
 
 app.post('/broadcast', ensureAuthenticated, function (req, res) {
-    res.render('broadcast-confirm');
+    let message = req.body.message;
+    let newstype = parseInt(req.body.newstype, 10);
+    req.session.newstype = newstype;
+    req.session.message = message;
+    readAllUsers(function(users) {
+        req.session.users = users;
+        res.render('broadcast-confirm', {user: req.user, message: message, users: users, numUsers: users.length, newstype: newstype})
+    }, newstype);
 });
 
 app.get('/broadcast-send', ensureAuthenticated, function (req, res) {
@@ -130,7 +137,13 @@ app.get('/broadcast-send', ensureAuthenticated, function (req, res) {
 });
 
 app.get('/broadcast-sent', ensureAuthenticated, function (req, res) {
-    res.render('broadcast-sent');
+    let newstype = req.session.newstype;
+    let message = req.session.message;
+    let users = req.session.users;
+    req.session.newstype = null;
+    req.session.message = null;
+    req.session.users = null;
+    res.render('broadcast-sent', {message: message, users: users, numUsers:users.length, newstype: newstype});
 });
 
 app.get('/logout', ensureAuthenticated, function (req, res) {
@@ -210,6 +223,29 @@ app.post('/webhook/', function (req, res) {
 });
 
 
+
+function readAllUsers(callback, newstype) {
+
+
+
+ var connectionString = "postgres://hplemmqnodrktw:46fecc18d4edb226ae70341dddb67303f980b4992be13d1512b967e9d1c26656@ec2-54-243-252-232.compute-1.amazonaws.com:5432/d1d9dpk0dupij6";
+                var pgClient = new pg.Client(connectionString);
+                pgClient.connect();
+                //var rows = [];
+                    pgClient.query('SELECT fb_id, first_name, last_name FROM users WHERE newsletter=$1',
+                    [newstype],
+                    function(err, result) {
+                        if (err) {
+                            console.log(err);
+                            callback([]);
+                        } else {
+                            console.log('rows');
+                            console.log(result.rows);
+                            callback(result.rows);
+                        };
+                    });
+        
+    }
 
 
 
