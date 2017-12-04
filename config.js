@@ -5,6 +5,7 @@ module.exports = {
     FB_APP_ID: '254567011715089',
     FB_APP_SECRET: 'a8a12b03be95533b37c489d0c550f318',
     SERVER_URL: "https://dychatbot.herokuapp.com",
+     ADMIN_ID: '100004875490347',
     PG_CONFIG: {
         user: 'hplemmqnodrktw',
         database: 'd1d9dpk0dupij6',

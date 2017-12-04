@@ -116,7 +116,7 @@ app.get('/no-access', function (req, res) {
 })
 
 app.get('/broadcast', ensureAuthenticated, function (req, res) {
-    res.render('broadcast');
+    res.render('broadcast',{user: req.user});
 });
 
 app.post('/broadcast', ensureAuthenticated, function (req, res) {
@@ -138,10 +138,12 @@ app.get('/logout', ensureAuthenticated, function (req, res) {
 
 function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
-       
+       if(req.user.id===config.ADMIN_ID)
+       {
             return next();
+       }
         
-       
+       res.redirect('/no-access');
     } else {
         res.redirect('/');
     }
