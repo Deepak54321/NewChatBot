@@ -14,7 +14,9 @@
 <main>
     <div class="container">
 
-        <h2>Hello Broadcast</h2>
+        <h2>Hello,<%=user.displayName%></h2>
+        <p>ID:<%=user.id %></p>
+        <p><%-JSON.stringify(user)%></p>
         
     </div>
 </main>
