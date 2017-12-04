@@ -4,7 +4,7 @@ module.exports = {
     API_AI_CLIENT_ACCESS_TOKEN: 'a8f9b2a9bb9540bc85c6129d94e86f26',
     FB_APP_ID: '254567011715089',
     FB_APP_SECRET: 'a8a12b03be95533b37c489d0c550f318',
-    SERVER_URL: "https://dychatbot.herokuapp.com",
+    SERVER_URL: "https://dychatbot.herokuapp.com/",
     ADMIN_ID: '100004875490347',
     PG_CONFIG: {
         user: 'hplemmqnodrktw',
