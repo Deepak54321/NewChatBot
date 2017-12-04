@@ -12,7 +12,6 @@ const pg=require('pg');
 const passport=require('passport');
 const FacebookStrategy=require('passport-facebook').Strategy;
 const session = require('express-session');
-
 pg.defaults.ssl=true;
 //used to establish a session facebook authenticated user
 
@@ -73,10 +72,6 @@ passport.serializeUser(function(profile, cb) {
   cb(null, profile);
 });
 
-passport.deserializeUser(function(profile,cb) {
-  cb(null, profile);
-});
-
 app.set('view engine', 'ejs');
 
 app.get('/auth/facebook',passport.authenticate('facebook',{scope:'public_profile'}));
@@ -84,6 +79,9 @@ app.get('/auth/facebook',passport.authenticate('facebook',{scope:'public_profile
 app.get('/auth/facebook/callback',
     passport.authenticate('facebook',{sucessRedirect:'/broadcast',failureRedirect:'/'}));
 
+passport.deserializeUser(function(profile,cb) {
+  cb(null, profile);
+});
 
 
 //facebook authentication to give broadcast messages
@@ -723,7 +721,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                             console.log("State Id %s",StateId);
                             if(StateId!='') {
                                 //call();
-								//sendQuickReply(sender,"No dealers Found in your area Please restart your conversation", reply2);
+                                //sendQuickReply(sender,"No dealers Found in your area Please restart your conversation", reply2);
                             
 
                             //sendTextMessage(sender,StateId);
@@ -749,8 +747,8 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 
                                   
                                     request({
-                                        url: 'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/search?type=sales&profile_id=' + StateId + '&city_profile_id=' + CityId	
-									}, function (error, response, body) {
+                                        url: 'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/search?type=sales&profile_id=' + StateId + '&city_profile_id=' + CityId  
+                                    }, function (error, response, body) {
                                         if (!error && response.statusCode == 200) {
                                             var result = JSON.parse(body);
                                             var resData = result.responseData;
@@ -760,37 +758,37 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                             var dealer_add = dealers[0].dealer_address;
                                             var dealer_Mob = dealers[0].sales_manager_mobile;
                                             var text1 = dealer_name + dealer_add + dealer_Mob;
-											message=text1;
-											//test= message;
+                                            message=text1;
+                                            //test= message;
                                             //text1="Helloa";
                                             console.log("Dealer information %s",message);
-											console.log("batman begins");
+                                            console.log("batman begins");
                                             if(message!='') {
-												  var text2=true;
-											
-											let qreply = [
+                                                  var text2=true;
+                                            
+                                            let qreply = [
                                                 {
                                                     "content_type": "text",
                                                     "title": "Feedback",
                                                     "payload": "Feedback"
                                                 }
                                             ];
-						               sendQuickReply(sender,message,qreply);
-											//console.log("Dealer information inside %s",check);
-											}
-											else
-											{
-												let reply1 = [
+                                       sendQuickReply(sender,message,qreply);
+                                            //console.log("Dealer information inside %s",check);
+                                            }
+                                            else
+                                            {
+                                                let reply1 = [
                                                 {
                                                     "content_type": "text",
                                                     "title": "Feedback",
                                                     "payload": "Feedback"
                                                 }
                                             ];
-						sendQuickReply(sender,"No dealers Found in your area", reply1);
-												
-											//console.log("Dealer information inside1 %s",check);
-											}
+                        sendQuickReply(sender,"No dealers Found in your area", reply1);
+                                                
+                                            //console.log("Dealer information inside1 %s",check);
+                                            }
                                      
                                     //}
                                            
@@ -799,21 +797,21 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                         else {
                                             console(log.error());
                                         }
-										
+                                        
                                     });
-									//dealer api call ends here
-								}
-								else
-								{
-									let reply2 = [
+                                    //dealer api call ends here
+                                }
+                                else
+                                {
+                                    let reply2 = [
                                                 {
                                                     "content_type": "text",
                                                     "title": "Feedback",
                                                     "payload": "Feedback"
                                                 }
                                             ];
-						sendQuickReply(sender,"No dealers Found in your area", reply2);
-								}
+                        sendQuickReply(sender,"No dealers Found in your area", reply2);
+                                }
                                    
 
                                 }
@@ -821,28 +819,28 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                     console(log.error());
                                 }
                             });
-							//city api end here
-						}
-						else
-						{
-							let reply3 = [
+                            //city api end here
+                        }
+                        else
+                        {
+                            let reply3 = [
                                                 {
                                                     "content_type": "text",
                                                     "title": "Feedback",
                                                     "payload": "Feedback"
                                                 }
                                             ];
-						sendQuickReply(sender,"No dealers Found in your area", reply3);
-						}
-							
+                        sendQuickReply(sender,"No dealers Found in your area", reply3);
+                        }
+                            
                         }
                         else {
                             console(log.error());
                         }
                     });
-					
-					
-					
+                    
+                    
+                    
                 }
                 else {
                     console(log.error());
