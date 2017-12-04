@@ -343,7 +343,7 @@ var connectionString = "postgres://hplemmqnodrktw:46fecc18d4edb226ae70341dddb673
 function handleQuickReply(senderID, quickReply, messageId) {
     var quickReplyPayload = quickReply.payload;
 
-    /*switch (quickReplyPayload) {
+    switch (quickReplyPayload) {
         case 'NEWS_PER_WEEK':
             newsletterSettings(function(updated) {
                 if (updated) {
@@ -365,7 +365,8 @@ function handleQuickReply(senderID, quickReply, messageId) {
                         "Try again later!");
                 }
             }, 2, senderID);
-            break;*/
+            break;
+        }
    // console.log("Quick reply for message %s with payload %s", messageId, quickReplyPayload);
     //send payload to api.ai
     sendToApiAi(senderID, quickReplyPayload);
