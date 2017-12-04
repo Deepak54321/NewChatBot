@@ -12,6 +12,7 @@ const pg=require('pg');
 const passport=require('passport');
 const FacebookStrategy=require('passport-facebook').Strategy;
 const session = require('express-session');
+
 pg.defaults.ssl=true;
 //used to establish a session facebook authenticated user
 
@@ -72,6 +73,10 @@ passport.serializeUser(function(profile, cb) {
   cb(null, profile);
 });
 
+passport.deserializeUser(function(profile,cb) {
+  cb(null, profile);
+});
+
 app.set('view engine', 'ejs');
 
 app.get('/auth/facebook',passport.authenticate('facebook',{scope:'public_profile'}));
@@ -79,16 +84,13 @@ app.get('/auth/facebook',passport.authenticate('facebook',{scope:'public_profile
 app.get('/auth/facebook/callback',
     passport.authenticate('facebook',{sucessRedirect:'/broadcast',failureRedirect:'/'}));
 
-passport.deserializeUser(function(profile,cb) {
-  cb(null, profile);
-});
 
 
 //facebook authentication to give broadcast messages
 passport.use(new FacebookStrategy({
     clientID: config.FB_APP_ID,
     clientSecret: config.FB_APP_SECRET,
-    callbackURL: config.SERVER_URL + "auth/facebook/callback"
+    callbackURL: config.SERVER_URL + "/auth/facebook/callback"
   },
   function(accessToken, refreshToken, profile, cb) {
     process.nextTick(function()
