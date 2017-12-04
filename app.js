@@ -64,7 +64,8 @@ app.use(session({
 secret:'keyboard cat',
 resave:true,
 saveUninitilized:true
-}));
+}
+));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -88,7 +89,7 @@ passport.deserializeUser(function(profile,cb) {
 passport.use(new FacebookStrategy({
     clientID: config.FB_APP_ID,
     clientSecret: config.FB_APP_SECRET,
-    callbackURL: config.SERVER_URL + "http://localhost:3000/auth/facebook/callback"
+    callbackURL: config.SERVER_URL + "auth/facebook/callback"
   },
   function(accessToken, refreshToken, profile, cb) {
     process.nextTick(function()
