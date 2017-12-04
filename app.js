@@ -140,12 +140,12 @@ app.get('/logout', ensureAuthenticated, function (req, res) {
 
 function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
-       //if(req.user.id===config.ADMIN_ID)
-       //{
+       if(req.user.id===config.ADMIN_ID)
+       {
             return next();
-       //}
+       }
         
-      //res.redirect('/no-access');
+      res.redirect('/no-access');
     } else {
         res.redirect('/');
     }
