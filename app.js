@@ -72,16 +72,18 @@ passport.serializeUser(function(profile, cb) {
   cb(null, profile);
 });
 
-app.set('view engine', 'ejs');
-
-app.get('/auth/facebook',passport.authenticate('facebook',{scope:'public_profile'}));
-
-app.get('/auth/facebook/callback',
-    passport.authenticate('facebook',{sucessRedirect:'/broadcast',failureRedirect:'/'}));
-
 passport.deserializeUser(function(profile,cb) {
   cb(null, profile);
-});
+})
+
+app.set('view engine', 'ejs');
+
+app.get('/auth/facebook', passport.authenticate('facebook',{scope:'public_profile'}));
+
+
+app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', { successRedirect : '/broadcast', failureRedirect: '/' }));
+
 
 
 //facebook authentication to give broadcast messages
