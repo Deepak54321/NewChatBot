@@ -322,9 +322,52 @@ function receivedMessage(event) {
     }
 }*/
 
+
+ function newsletterSettings(callback, setting, userId) {
+
+
+var connectionString = "postgres://hplemmqnodrktw:46fecc18d4edb226ae70341dddb67303f980b4992be13d1512b967e9d1c26656@ec2-54-243-252-232.compute-1.amazonaws.com:5432/d1d9dpk0dupij6";
+                var pgClient = new pg.Client(connectionString);
+                pgClient.connect();
+                    pgClient.query('UPDATE users SET newsletter=$1 WHERE fb_id=$2',
+                    [setting, userId],
+                    function(err, result) {
+                        if (err) {
+                            console.log(err);
+                            callback(false);
+                        } else {
+                            callback(true);
+                        };
+                    });
+    }
+
 function handleQuickReply(senderID, quickReply, messageId) {
     var quickReplyPayload = quickReply.payload;
-    console.log("Quick reply for message %s with payload %s", messageId, quickReplyPayload);
+
+    switch (quickReplyPayload) {
+        case 'NEWS_PER_WEEK':
+            newsletterSettings(function(updated) {
+                if (updated) {
+                    sendTextMessage(senderID, "Thank you for subscribing!" +
+                        "If you want to usubscribe just write 'unsubscribe from newsletter'");
+                } else {
+                    sendTextMessage(senderID, "Newsletter is not available at this moment." +
+                        "Try again later!");
+                }
+            }, 1, senderID);
+            break;
+        case 'NEWS_PER_DAY':
+            newsletterSettings(function(updated) {
+                if (updated) {
+                    sendTextMessage(senderID, "Thank you for subscribing!" +
+                        "If you want to usubscribe just write 'unsubscribe from newsletter'");
+                } else {
+                    sendTextMessage(senderID, "Newsletter is not available at this moment." +
+                        "Try again later!");
+                }
+            }, 2, senderID);
+            break;
+   // console.log("Quick reply for message %s with payload %s", messageId, quickReplyPayload);
     //send payload to api.ai
     sendToApiAi(senderID, quickReplyPayload);
 }
@@ -337,6 +380,16 @@ function handleEcho(messageId, appId, metadata) {
 
 function handleApiAiAction(sender, action, responseText, contexts, parameters) {
     switch (action) {
+        case "unsubscribe":
+                  newsletterSettings(function(updated) {
+                if (updated) {
+                    sendTextMessage(sender, "You're unsubscribed. You can always subscribe back!");
+                } else {
+                    sendTextMessage(sender, "Newsletter is not available at this moment." +
+                        "Try again later!");
+                }
+            }, 0, sender);
+            break;
         case "user-feedback":
             let replies =  [
                 {
@@ -1358,6 +1411,27 @@ function sendAccountLinking(recipientId) {
 }
 
 
+function sendFunNewsSubscribe(userId) {
+    let responceText = "I can send you latest fun technology news, " +
+        "you'll be on top of things and you'll get some laughts. How often would you like to receive them?";
+
+    let replies = [
+        {
+            "content_type": "text",
+            "title": "Once per week",
+            "payload": "NEWS_PER_WEEK"
+        },
+        {
+            "content_type": "text",
+            "title": "Once per day",
+            "payload": "NEWS_PER_DAY"
+        }
+    ];
+
+    sendQuickReply(userId, responceText, replies);
+}
+
+
 function greetUserText(userId) {
 
     //first read user firstname
@@ -1506,6 +1580,8 @@ function receivedPostback(event) {
     var payload = event.postback.payload;
 
     switch (payload) {
+        case 'FUN_NEWS':
+            sendFunNewsSubscribe(senderID);
         case "GET_STARTED":
             greetUserText(senderID);
             break;
