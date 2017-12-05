@@ -643,13 +643,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 
             //pgClient.connect();
             //var rows = [];
-            let comrply =  [
-                {
-                    "content_type":"text",
-                    "title":"Restart",
-                    "payload":"Restart"
-                }
-            ];
+            
             if(isDefined(contexts[0]) && contexts[0].name=='welcomeyamaha' && contexts[0].parameters) {
                 let phone_number = (isDefined(contexts[0].parameters['complaintphonenumber']) &&
                     contexts[0].parameters['complaintphonenumber'] != '') ? contexts[0].parameters['complaintphonenumber'] : '';
@@ -675,6 +669,13 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     console.log("%s",emailContent);
                     console.log("Sender Id %s",SSenderId);
                     console.log("Default Sender Id %s",sender);
+                    let comrply =  [
+                {
+                    "content_type":"text",
+                    "title":"Restart",
+                    "payload":"Restart"
+                }
+                     ];
                     sendQuickReply(sender,emailContent,comrply);
                     //responseText=emailContent;
                 }
