@@ -988,10 +988,10 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 
  case "testdealer-info":
             // let dealer_pin= contexts[0].parameters['pincode'];
-            let dealer_pin=(isDefined(contexts[0].parameters['pincode'])&&
-                contexts[0].parameters['pincode']!='')? contexts[0].parameters['TestPincode']:'';
+            let dealer_pin=(isDefined(contexts[0].parameters['TestPincode'])&&
+                contexts[0].parameters['TestPincode']!='')? contexts[0].parameters['TestPincode']:'';
             //var pincode=110005;
-
+             console.log("%s dealers pin",dealer_pin);
            var StateId='';
             var CityId='';
             var City='';
