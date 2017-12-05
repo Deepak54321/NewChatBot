@@ -982,9 +982,6 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
             });
 
             break;
-        case "user":
-            sendTextMessage(sender,"Your Id"+sender.id+"");
-            break;
 
  case "testdealer-info":
             // let dealer_pin= contexts[0].parameters['pincode'];
@@ -1189,7 +1186,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 //now insert here
 
             });
-           
+           break;
         default:
             //unhandled action, just send back the text
             sendTextMessage(sender, responseText);
