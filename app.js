@@ -1735,8 +1735,8 @@ function greetUserText(userId) {
                     },
                     {
                         "content_type":"text",
-                        "title":"Test Drive",
-                        "payload":"Test Drive"
+                        "title":"Test Ride",
+                        "payload":"Test Ride"
                     },
                     {
                         "content_type":"text",
