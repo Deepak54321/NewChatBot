@@ -497,7 +497,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     sendQuickReply(sender,emailContent,rply);
                     //responseText=emailContent;
                 }
-                var connectionString = "postgres://hplemmqnodrktw:46fecc18d4edb226ae70341dddb67303f980b4992be13d1512b967e9d1c26656@ec2-54-243-252-232.compute-1.amazonaws.com:5432/d1d9dpk0dupij6";
+               /* var connectionString = "postgres://hplemmqnodrktw:46fecc18d4edb226ae70341dddb67303f980b4992be13d1512b967e9d1c26656@ec2-54-243-252-232.compute-1.amazonaws.com:5432/d1d9dpk0dupij6";
                 var pgClient = new pg.Client(connectionString);
                 pgClient.connect();
                 var rows = [];
@@ -551,7 +551,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                             }
                         }
                     });
-                sendQuickReply(sender,responseText,rply);
+                sendQuickReply(sender,responseText,rply);*/
             }
             break;
         case "testuser-data":
@@ -581,7 +581,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     //responseText=emailContent;
                 }
 
-                var connectionString = "postgres://hplemmqnodrktw:46fecc18d4edb226ae70341dddb67303f980b4992be13d1512b967e9d1c26656@ec2-54-243-252-232.compute-1.amazonaws.com:5432/d1d9dpk0dupij6";
+               /* var connectionString = "postgres://hplemmqnodrktw:46fecc18d4edb226ae70341dddb67303f980b4992be13d1512b967e9d1c26656@ec2-54-243-252-232.compute-1.amazonaws.com:5432/d1d9dpk0dupij6";
                 var pgClient = new pg.Client(connectionString);
                 pgClient.connect();
                 var rows = [];
@@ -636,13 +636,21 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                         }
                     });
 
-                sendTextMessage(sender, responseText);
+                sendTextMessage(sender, responseText);*/
             }
             break;
         case "complaintuser-data":
 
             //pgClient.connect();
             //var rows = [];
+
+             let complaintrply =  [
+                {
+                    "content_type":"text",
+                    "title":"Restart",
+                    "payload":"Restart"
+                }
+            ];
             
             if(isDefined(contexts[0]) && contexts[0].name=='welcomeyamaha' && contexts[0].parameters) {
                 let phone_number = (isDefined(contexts[0].parameters['complaintphonenumber']) &&
@@ -669,17 +677,11 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     console.log("%s",emailContent);
                     console.log("Sender Id %s",SSenderId);
                     console.log("Default Sender Id %s",sender);
-                    let comrply =  [
-                {
-                    "content_type":"text",
-                    "title":"Restart",
-                    "payload":"Restart"
-                }
-                     ];
-                    sendQuickReply(sender,emailContent,comrply);
+               
+                    sendQuickReply(sender,emailContent,complaintrply);
                     //responseText=emailContent;
                 }
-                var connectionString = "postgres://hplemmqnodrktw:46fecc18d4edb226ae70341dddb67303f980b4992be13d1512b967e9d1c26656@ec2-54-243-252-232.compute-1.amazonaws.com:5432/d1d9dpk0dupij6";
+                /*var connectionString = "postgres://hplemmqnodrktw:46fecc18d4edb226ae70341dddb67303f980b4992be13d1512b967e9d1c26656@ec2-54-243-252-232.compute-1.amazonaws.com:5432/d1d9dpk0dupij6";
                 var pgClient = new pg.Client(connectionString);
                 pgClient.connect();
                 var rows = [];
@@ -726,7 +728,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                             console.log("error occured "+err);
                                         }
                                     });*/
-                                let sql = 'INSERT INTO complaints (user_name, phone_number, email, chasis_number, feedback, fb_id, model_name, complaint_number,complaint_desc) VALUES ($1, $2, $3, $4, $5, $6, $7, $8,$9)';
+                               /* let sql = 'INSERT INTO complaints (user_name, phone_number, email, chasis_number, feedback, fb_id, model_name, complaint_number,complaint_desc) VALUES ($1, $2, $3, $4, $5, $6, $7, $8,$9)';
                                 console.log('sql: ' + sql);
                                 pgClient.query(sql,
                                     [
@@ -745,7 +747,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     });
                 //pgClient.end();
 
-                sendTextMessage(sender, responseText);
+                sendTextMessage(sender, responseText);*/
             }
             break;
         case "dealer-price":
