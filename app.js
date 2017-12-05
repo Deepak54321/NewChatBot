@@ -988,10 +988,10 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 
  case "testdealer-info":
             // let dealer_pin= contexts[0].parameters['pincode'];
-            let dealer_pin=(isDefined(contexts[0].parameters['TestPincode'])&&
+            let pin=(isDefined(contexts[0].parameters['TestPincode'])&&
                 contexts[0].parameters['TestPincode']!='')? contexts[0].parameters['TestPincode']:'';
             //var pincode=110005;
-             console.log("%s dealers pin",dealer_pin);
+             console.log("%s dealers pin",pin);
            var StateId='';
             var CityId='';
             var City='';
@@ -1009,7 +1009,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
             var request = require('request');
             //1
             request({
-                url:'https://maps.googleapis.com/maps/api/geocode/json?address='+dealer_pin+'&key=AIzaSyD_YqB4d_-xKcmNP9jJCiPkJYDS8J3f6pI'
+                url:'https://maps.googleapis.com/maps/api/geocode/json?address='+pin+'&key=AIzaSyD_YqB4d_-xKcmNP9jJCiPkJYDS8J3f6pI'
             },function (error,response,body) {
                 if (!error && response.statusCode == 200) {
                     var result = JSON.parse(body);
