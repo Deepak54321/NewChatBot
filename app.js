@@ -985,6 +985,211 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
         case "user":
             sendTextMessage(sender,"Your Id"+sender.id+"");
             break;
+
+ case "testdealer-info":
+            // let dealer_pin= contexts[0].parameters['pincode'];
+            let dealer_pin=(isDefined(contexts[0].parameters['pincode'])&&
+                contexts[0].parameters['pincode']!='')? contexts[0].parameters['TestPincode']:'';
+            //var pincode=110005;
+
+           var StateId='';
+            var CityId='';
+            var City='';
+            var State='';
+            var Country='';
+            var lat='';
+            var lng='';
+            var State_Name='';
+            var City_Name='';
+            var address='';
+            var stateF='';
+            var dealerId='';
+            var address_components='';
+            var message='';
+            var request = require('request');
+            //1
+            request({
+                url:'https://maps.googleapis.com/maps/api/geocode/json?address='+dealer_pin+'&key=AIzaSyD_YqB4d_-xKcmNP9jJCiPkJYDS8J3f6pI'
+            },function (error,response,body) {
+                if (!error && response.statusCode == 200) {
+                    var result = JSON.parse(body);
+                    var Results = result.results;
+                    for (var i = 0; i < Results.length; i++)
+                    {
+                        address = Results[i].formatted_address;
+                        address_components = Results[i].address_components;
+                        var len = address_components.length;
+                        var gemotry = Results[i].geometry;
+                        var location = gemotry.location;
+                        lat = location.lat;
+                        lng = location.lng;
+                        for (var j = 0; j < address_components.length; j++) {
+                            if (j == len - 3) {
+                                City = address_components[j].long_name;
+                            }
+                            else if (j == len - 2) {
+                                State = address_components[j].long_name;
+                            }
+                            else if (j == len - 1) {
+                                Country = address_components[j].long_name;
+                            }
+                        }
+                    }
+                    console.log("State %s",State);
+                    console.log("City %s",City);
+                    console.log("Country %s",Country);
+                   
+                    var view = State + City + Country + 'Hi now you can get your dealers' + lat + lng;
+                    //2
+                    request({
+                        url: 'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/state'
+                    }, function (error, response, body) {
+                        if (!error && response.statusCode == 200) {
+                            var res = JSON.parse(body);
+                            var responseData = res.responseData;
+                            var states = responseData.states;
+
+                            for (var i = 0; i < states.length; i++) {
+                                if (states[i].state_name === State) {
+                                    StateId = states[i].profile_id;
+                                    State_Name = states[i].state_name;
+
+                                }
+
+                            }
+                            
+                            console.log("State Id %s",StateId);
+                            if(StateId!='') {
+                                //call();
+                                //sendQuickReply(sender,"No dealers Found in your area Please restart your conversation", reply2);
+                            
+
+                            //sendTextMessage(sender,StateId);
+                            //3
+                            request({
+                                url: 'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/city?profile_id=' + StateId
+                            }, function (error, response, body) {
+                                if (!error && response.statusCode == 200) {
+                                    var result = JSON.parse(body);
+                                    var responsData = result.responseData;
+                                    var citites = responsData.cities;
+                                    for (var i = 0; i < citites.length; i++) {
+
+                                        if (citites[i].city_name == City) {
+                                            CityId = citites[i].city_profile_id;
+                                        }
+                                    }
+                                    console.log("City Id %s",CityId);
+                                   
+                                    if(CityId!='') {
+                                        //sendQuickReply(sender,"No dealers Found in your area Please restart your conversation", reply3);
+                                    
+
+                                  
+                                    request({
+                                        url: 'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/search?type=sales&profile_id=' + StateId + '&city_profile_id=' + CityId  
+                                    }, function (error, response, body) {
+                                        if (!error && response.statusCode == 200) {
+                                            var result = JSON.parse(body);
+                                            var resData = result.responseData;
+                                            var dealers = resData.dealers;
+                                            dealerId=dealers[0].dealer_name;
+                                            var dealer_name = dealers[0].dealer_name;
+                                            var dealer_add = dealers[0].dealer_address;
+                                            var dealer_Mob = dealers[0].sales_manager_mobile;
+                                            var text1 = dealer_name + dealer_add + dealer_Mob;
+                                            message=text1;
+                                            //test= message;
+                                            //text1="Helloa";
+                                            console.log("Dealer information %s",message);
+                                            console.log("batman begins");
+                                            if(message!='') {
+                                                  var text2=true;
+                                            
+                                            let qreply = [
+                                                {
+                                                    "content_type": "text",
+                                                    "title": "Feedback",
+                                                    "payload": "Feedback"
+                                                }
+                                            ];
+                                       sendQuickReply(sender,message,qreply);
+                                            //console.log("Dealer information inside %s",check);
+                                            }
+                                            else
+                                            {
+                                                let reply1 = [
+                                                {
+                                                    "content_type": "text",
+                                                    "title": "Feedback",
+                                                    "payload": "Feedback"
+                                                }
+                                            ];
+                        sendQuickReply(sender,"No dealers Found in your area", reply1);
+                                                
+                                            //console.log("Dealer information inside1 %s",check);
+                                            }
+                                     
+                                    //}
+                                           
+                                            //sendTextMessage(sender,text1);
+                                        }
+                                        else {
+                                            console(log.error());
+                                        }
+                                        
+                                    });
+                                    //dealer api call ends here
+                                }
+                                else
+                                {
+                                    let reply2 = [
+                                                {
+                                                    "content_type": "text",
+                                                    "title": "Feedback",
+                                                    "payload": "Feedback"
+                                                }
+                                            ];
+                        sendQuickReply(sender,"No dealers Found in your area", reply2);
+                                }
+                                   
+
+                                }
+                                else {
+                                    console(log.error());
+                                }
+                            });
+                            //city api end here
+                        }
+                        else
+                        {
+                            let reply3 = [
+                                                {
+                                                    "content_type": "text",
+                                                    "title": "Feedback",
+                                                    "payload": "Feedback"
+                                                }
+                                            ];
+                        sendQuickReply(sender,"No dealers Found in your area", reply3);
+                        }
+                            
+                        }
+                        else {
+                            console(log.error());
+                        }
+                    });
+                    
+                    
+                    
+                }
+                else {
+                    console(log.error());
+
+                }
+//now insert here
+
+            });
+           
         default:
             //unhandled action, just send back the text
             sendTextMessage(sender, responseText);
