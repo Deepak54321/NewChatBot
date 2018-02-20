@@ -753,7 +753,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
         case "dealer-price":
             var request = require('request');
             request({
-                url:'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/statewiseprice/getprice?product_profile_id=salutorxspcol&state_id=240'
+                url:'http://iym.ymslilabs.com/iym-web-api/51DCDFC2A2BC9/statewiseprice/getprice?product_profile_id=salutorxspcol&state_id=240'
             },function (error,response,body) {
                 if (!error && response.statusCode == 200) {
                     let result = JSON.parse(body);
@@ -833,7 +833,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     var view = State + City + Country + 'Hi now you can get your dealers' + lat + lng;
                     //2
                     request({
-                        url: 'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/state'
+                        url: 'http://iym.ymslilabs.com/iym-web-api/51DCDFC2A2BC9/network/state'
                     }, function (error, response, body) {
                         if (!error && response.statusCode == 200) {
                             var res = JSON.parse(body);
@@ -858,7 +858,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                             //sendTextMessage(sender,StateId);
                             //3
                             request({
-                                url: 'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/city?profile_id=' + StateId
+                                url: 'http://iym.ymslilabs.com/iym-web-api/51DCDFC2A2BC9/network/city?profile_id=' + StateId
                             }, function (error, response, body) {
                                 if (!error && response.statusCode == 200) {
                                     var result = JSON.parse(body);
@@ -878,7 +878,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 
                                   
                                     request({
-                                        url: 'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/search?type=sales&profile_id=' + StateId + '&city_profile_id=' + CityId  
+                                        url: 'http://iym.ymslilabs.com/iym-web-api/51DCDFC2A2BC9/network/search?type=sales&profile_id=' + StateId + '&city_profile_id=' + CityId  
                                     }, function (error, response, body) {
                                         if (!error && response.statusCode == 200) {
                                             var result = JSON.parse(body);
@@ -1039,7 +1039,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     var view = State + City + Country + 'Hi now you can get your dealers' + lat + lng;
                     //2
                     request({
-                        url: 'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/state'
+                        url: 'http://iym.ymslilabs.com/iym-web-api/51DCDFC2A2BC9/network/state'
                     }, function (error, response, body) {
                         if (!error && response.statusCode == 200) {
                             var res = JSON.parse(body);
@@ -1064,7 +1064,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                             //sendTextMessage(sender,StateId);
                             //3
                             request({
-                                url: 'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/city?profile_id=' + StateId
+                                url: 'http://iym.ymslilabs.com/iym-web-api/51DCDFC2A2BC9/network/city?profile_id=' + StateId
                             }, function (error, response, body) {
                                 if (!error && response.statusCode == 200) {
                                     var result = JSON.parse(body);
@@ -1084,7 +1084,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 
                                   
                                     request({
-                                        url: 'http://www.yamaha-motor-india.com/iym-web-api//51DCDFC2A2BC9/network/search?type=sales&profile_id=' + StateId + '&city_profile_id=' + CityId  
+                                        url: 'http://iym.ymslilabs.com/iym-web-api/51DCDFC2A2BC9/network/search?type=sales&profile_id=' + StateId + '&city_profile_id=' + CityId  
                                     }, function (error, response, body) {
                                         if (!error && response.statusCode == 200) {
                                             var result = JSON.parse(body);
